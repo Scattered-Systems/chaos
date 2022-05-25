@@ -1,0 +1,22 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>"]
+description = "A complete decentralized cloud storage solution"
+edition = "2021"
+license = "MIT"
+name = "chaotic"
+repository = "https://github.com/scattered-systems/chaos.git"
+version = "0.1.0"
+
+[lib]
+bench = false
+crate-type = ["cdylib", "rlib"]
+name = "chaotic"
+path = "src/lib.rs"
+test = true
+
+[[test]]
+name = "simple"
+path = "tests/simple.rs"
+
+[dependencies]
+
