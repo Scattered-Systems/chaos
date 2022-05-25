@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  CARGO_PACKAGE: chaotic
+  CARGO_PACKAGE: chaotic_systems
   CARGO_TERM_COLOR: always
 
 jobs:
