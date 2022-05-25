@@ -1,3 +1,3 @@
-# chaos
+# chaotic
 
 A complete decentralized cloud storage management solution
