@@ -1,8 +1,8 @@
 job("Build and Push: Chaos") {
     docker {
         build {
-            context = "."
-            file = "./Dockerfile"
+            context = "./bin"
+            file = "./bin/Dockerfile"
             args["HTTP_PROXY"] = "http://0.0.0.0:8080"
             labels["vendor"] = "scattered-systems"
         }
