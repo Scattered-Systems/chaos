@@ -3,14 +3,14 @@ authors = ["FL03 <jo3mccain@icloud.com>"]
 description = "A complete decentralized cloud storage solution"
 edition = "2021"
 license = "MIT"
-name = "chaotic_systems"
+name = "disaronno"
 repository = "https://github.com/scattered-systems/chaos.git"
-version = "0.1.0"
+version = "0.1.1"
 
 [lib]
 bench = false
 crate-type = ["cdylib", "rlib"]
-name = "chaotic_systems"
+name = "disaronno"
 path = "src/lib.rs"
 test = true
 
