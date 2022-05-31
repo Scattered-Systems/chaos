@@ -3,15 +3,10 @@ authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattere
 description = ""
 edition = "2021"
 license = "MIT"
-name = "bin"
+name = "chaos"
 repository = "https://github.com/scattered-systems/chaos.git"
 version = "0.1.0"
 
-[[bin]]
-bench = false
-name = "bin"
-path = "src/main.rs"
-test = false
 
 [dependencies]
 axum = "0.5.6"

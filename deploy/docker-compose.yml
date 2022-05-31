@@ -2,14 +2,14 @@ version: "3.9"
 services:
   application:
     build:
-      context: ../code/crates/bin
+      context: ../code/crates/chaos
       dockerfile: Dockerfile
     container_name: application
     ports:
       - "8000:8080"
     restart: always
     volumes:
-      - ../artifacts/docker/data/bin:/data
+      - ../artifacts/docker/data/chaos:/data
 
   cache:
     container_name: cache

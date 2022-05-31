@@ -32,7 +32,7 @@ pub struct Server {
 
 impl std::fmt::Display for Server {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "View the bin locally at http://localhost:{}", self.port)
+        write!(f, "View the chaos locally at http://localhost:{}", self.port)
     }
 }
 

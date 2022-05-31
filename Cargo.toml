@@ -1,5 +1,5 @@
 [workspace]
 members = [
-    "code/crates/bin",
-    "code/crates/lib"
+    "code/crates/chaos",
+    "code/crates/contained"
 ]
