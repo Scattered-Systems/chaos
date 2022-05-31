@@ -9,6 +9,7 @@ version = "0.1.0"
 
 
 [dependencies]
+async-std = "1.11.0"
 axum = "0.5.6"
 blake2 = "0.10.4"
 bson = { features = ["chrono-0_4", "serde_with"], version = "2.2.0" }
@@ -19,6 +20,8 @@ glob = "0.3.0"
 http = "0.2.7"
 hyper = { features = ["full"], version = "0.14.18" }
 libp2p = "0.44.0"
+log = "0.4.17"
+pretty_env_logger = "0.4.0"
 serde = { features = ["derive"], version = "1.0.137" }
 serde_json = "1.0.81"
 sha2 = "0.10.2"

@@ -7,24 +7,36 @@ use tower_http::{
     trace,
 };
 
+use crate::apps::api::{
+    context::Context,
+    endpoints,
+    logger::Logger,
+    settings::Settings,
+};
+
 #[derive(Clone, Debug)]
 pub struct Interface {
     pub address: std::net::SocketAddr,
-    pub context: crate::api::context::Context,
+    pub context: Context,
 }
 
 impl Interface {
-    pub async fn new(settings: crate::api::settings::Settings) -> Self {
-        crate::api::logger::Logger::setup(&settings);
+    pub async fn new() -> Self {
+        let settings = match Settings::new() {
+            Ok(value) => value,
+            Err(err) => panic!("ConfigurationError: {:#?}", err)
+        };
+
+        Logger::setup(&settings);
 
         let host = [0, 0, 0, 0];
         let port = settings.server.port;
 
         let address: std::net::SocketAddr = std::net::SocketAddr::from((host, port));
-        let context = crate::api::context::Context::new(settings.clone());
+        let context = crate::apps::api::context::Context::new(settings.clone());
 
         let client = axum::Router::new()
-            .merge(crate::api::endpoints::base::create_route())
+            .merge(endpoints::base::create_route())
             .layer(
                 trace::TraceLayer::new_for_http()
                     .make_span_with(
