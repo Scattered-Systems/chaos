@@ -10,7 +10,8 @@ RUN cargo build --release
 
 FROM debian:buster-slim
 
-COPY --from=builder /appseed/target/release/bin /appseed/bin
+COPY --from=builder /appseed/target/release/chaos /appseed/chaos
 
-EXPOSE 8080
-CMD ["./appseed/bin"]
+ENV PORT=8000
+EXPOSE ${PORT}
+CMD ["./appseed/chaos"]
