@@ -23,23 +23,20 @@ mod data;
 mod interface;
 mod settings;
 
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
     pretty_env_logger::init();
 
     // Create a local peer
     let local = crate::chain::peer::Peer::new();
-    println!("{}", local);
+    println!("{}", local.clone());
 
     // Create a keypair for authenticated encryption of the transport.
-    let noise_keys = crate::chain::peer::Peer::authorize(local.key);
+    let noise_keys = crate::chain::peer::Peer::authorize(local.key.clone());
 
-    let transport = TokioTcpConfig::new()
-        .nodelay(true)
-        .upgrade(upgrade::Version::V1)
-        .authenticate(noise::NoiseConfig::xx(noise_keys).into_authenticated())
-        .multiplex(mplex::MplexConfig::new())
-        .boxed();
+    let provider = crate::chain::peer::Provider::new(local.clone());
+    let transport = provider.transport.clone();
 
 
     let floodsub_topic = floodsub::Topic::new("chat");
@@ -95,9 +92,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>
 
         behaviour.floodsub.subscribe(floodsub_topic.clone());
 
-        SwarmBuilder::new(transport, behaviour, local.id)
-            // We want the connection background tasks to be spawned
-            // onto the tokio runtime.
+        SwarmBuilder::new(transport, behaviour, local.id.clone())
             .executor(Box::new(|fut| {
                 tokio::spawn(fut);
             }))
