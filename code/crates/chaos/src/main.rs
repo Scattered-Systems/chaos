@@ -32,9 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>
     println!("{}", local);
 
     // Create a keypair for authenticated encryption of the transport.
-    let noise_keys = noise::Keypair::<noise::X25519Spec>::new()
-        .into_authentic(&local.key)
-        .expect("Signing libp2p-noise static DH keypair failed.");
+    let noise_keys = crate::chain::peer::Peer::authorize(local.key);
 
     let transport = TokioTcpConfig::new()
         .nodelay(true)

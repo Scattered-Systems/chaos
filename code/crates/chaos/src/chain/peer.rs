@@ -18,6 +18,13 @@ impl Peer {
             key: key.clone(),
         }
     }
+
+    pub fn authorize(key: identity::Keypair) -> noise::AuthenticKeypair<noise::X25519Spec> {
+        let nk = noise::Keypair::new()
+            .into_authentic(key.clone())
+            .expect("Signing Error: Failed to sign the static DH KeyPair");
+        return nk;
+    }
 }
 
 impl std::fmt::Display for Peer {
