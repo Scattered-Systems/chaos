@@ -1,5 +1,6 @@
 use axum;
 use http::header;
+use std::net::SocketAddr;
 use tower_http::{
     compression::CompressionLayer,
     propagate_header::PropagateHeaderLayer,
@@ -7,13 +8,17 @@ use tower_http::{
     trace,
 };
 
-use crate::apps::api::endpoints;
-use crate::apps::settings::Settings;
+use crate::{
+    context::Context,
+    endpoints,
+    logger::Logger,
+    settings::Settings,
+};
 
 #[derive(Clone, Debug)]
 pub struct Interface {
-    pub address: std::net::SocketAddr,
-    pub context: context::Context,
+    pub address: SocketAddr,
+    pub context: Context,
 }
 
 impl Interface {
@@ -23,13 +28,13 @@ impl Interface {
             Err(err) => panic!("ConfigurationError: {:#?}", err)
         };
 
-        logger::Logger::setup(&settings);
+        Logger::setup(&settings);
 
         let host = [0, 0, 0, 0];
         let port = settings.server.port;
 
-        let address: std::net::SocketAddr = std::net::SocketAddr::from((host, port));
-        let context = context::Context::new(settings.clone());
+        let address: SocketAddr = SocketAddr::from((host, port));
+        let context = Context::new(settings.clone());
 
         let client = axum::Router::new()
             .merge(endpoints::base::create_route())
@@ -72,43 +77,5 @@ impl Interface {
             .expect("Failed to start server");
 
         Self { address, context }
-    }
-}
-
-pub mod context {
-    use serde::{Deserialize, Serialize};
-
-    use crate::apps::settings::Settings;
-
-    #[derive(Clone, Debug, Deserialize, Serialize)]
-    pub struct Context {
-        pub settings: Settings,
-    }
-
-    impl Context {
-        pub fn new(settings: Settings) -> Self {
-            Self {
-                settings
-            }
-        }
-    }
-}
-
-pub mod logger {
-    use crate::apps::settings::Settings;
-
-    pub struct Logger;
-
-    impl Logger {
-        pub fn setup(settings: &Settings) {
-            if std::env::var_os("RUST_LOG").is_none() {
-                let level = settings.logger.level.as_str();
-                let env = format!("api={},tower_http=debug", level);
-
-                std::env::set_var("RUST_LOG", env);
-            }
-
-            tracing_subscriber::fmt::init();
-        }
     }
 }

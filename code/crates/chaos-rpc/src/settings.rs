@@ -53,9 +53,9 @@ impl Settings {
             .set_default("application.slug", "application")?
             .set_default("database.name", "application")?
             .set_default("database.uri", "redis://localhost:6379")?
-            .set_default("logger.level", "info")?
+            .set_default("logger.level", "trace")?
             .set_default("provider.endpoint", "https://rpc.ankr.com/eth")?
-            .set_default("server.port", 8080)?;
+            .set_default("server.port", 8000)?;
 
         builder = builder.add_source(glob("**/*.config.*")
             .unwrap()
