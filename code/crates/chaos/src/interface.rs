@@ -15,7 +15,7 @@ use tokio::{
     select,
 };
 
-use crate::{chain::peer::Peer, settings::Settings};
+use crate::{chains::networking::Peer, settings::Settings};
 
 #[derive(NetworkBehaviour)]
 #[behaviour(event_process = true)]
@@ -107,6 +107,8 @@ impl Interface {
 
         // Listen on all interfaces and whatever port the OS assigns
         swarm.listen_on("/ip4/0.0.0.0/tcp/0".parse()?)?;
+
+        // Run
         loop {
             select! {
                 line = stdin.next_line() => {

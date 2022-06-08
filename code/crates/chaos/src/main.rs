@@ -3,7 +3,7 @@ use std::error::Error;
 use crate::interface::Interface;
 use crate::settings::Settings;
 
-mod chain;
+mod chains;
 mod data;
 mod interface;
 mod settings;
