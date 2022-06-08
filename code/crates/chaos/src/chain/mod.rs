@@ -6,7 +6,7 @@ pub mod peer;
 pub mod utilities {
     use log::info;
     use serde_json::json;
-    use sha2::Sha256;
+    use sha2::{Digest, Sha256};
 
     const DIFFICULTY_PREFIX: &str = "00";
 
