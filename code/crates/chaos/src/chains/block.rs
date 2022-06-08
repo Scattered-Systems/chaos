@@ -7,22 +7,23 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 use sha2::{Digest, Sha256};
 
-use crate::chains::primitives::{Bundle, Transaction};
-
 const DIFFICULTY_PREFIX: &str = "00";
+
+pub type Container<T> = HashMap<String, T>;
+pub type Transaction = Container<String>;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Block {
     pub id: ObjectId,
     pub hash: String,
-    pub nonce: String,
+    pub nonce: usize,
     pub previous: String,
     pub timestamp: Clock,
-    pub transactions: Bundle,
+    pub transactions: Vec<Transaction>,
 }
 
 impl Block {
-    pub fn new(nonce: String, previous: String, transactions: Bundle) -> Self {
+    pub fn new(nonce: usize, previous: String, transactions: Bundle) -> Self {
         Self {
             id: ObjectId::new(),
             hash: String::from(""),
@@ -35,6 +36,7 @@ impl Block {
 }
 
 
+#[derive(Clone, Debug)]
 pub struct Blockchain {
     pub chain: Vec<Block>,
     pub operator: String,

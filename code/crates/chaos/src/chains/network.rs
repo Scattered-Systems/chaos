@@ -13,24 +13,9 @@ use libp2p::{
 };
 
 #[derive(Clone, Debug)]
-pub enum Ops {
-    Activate,
-    Aggregate,
-    Create,
-    Read,
-}
-
-#[derive(Clone, Debug)]
-pub enum Status {
-    Valid,
-    Invalid,
-}
-
-#[derive(Clone, Debug)]
 pub struct Peer {
     pub id: PeerId,
     pub key: identity::Keypair,
-    pub status: Status,
 }
 
 impl Peer {
@@ -41,7 +26,6 @@ impl Peer {
         Self {
             id: id.clone(),
             key: key.clone(),
-            status: Status::Valid
         }
     }
 
@@ -49,7 +33,6 @@ impl Peer {
         Self {
             id: PeerId::from(key.public().clone()),
             key: key.clone(),
-            status: Status::Valid,
         }
     }
 
@@ -57,17 +40,17 @@ impl Peer {
         let dh_keys = noise::Keypair::<noise::X25519Spec>::new()
             .into_authentic(&self.key.clone())
             .expect("Signing Error: Failed to sign the static DH KeyPair");
-        return dh_keys
+        return dh_keys.clone();
     }
 
     pub fn transport(&self) -> Boxed<(PeerId, StreamMuxerBox)> {
         let transport = tcp::TokioTcpConfig::new()
             .nodelay(true)
             .upgrade(upgrade::Version::V1)
-            .authenticate(noise::NoiseConfig::xx(self.authorize().clone()).into_authenticated())
+            .authenticate(noise::NoiseConfig::xx(self.authorize()).into_authenticated())
             .multiplex(mplex::MplexConfig::new())
             .boxed();
-        return transport.clone()
+        return transport.clone();
     }
 }
 
