@@ -1,3 +1,3 @@
 # chaos
 
-A complete decentralized cloud storage management solution
+Welcome to Chaos, a self-hosted virtual storage network.

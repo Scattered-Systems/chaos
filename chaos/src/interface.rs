@@ -1,72 +1,27 @@
 use futures::StreamExt;
 use libp2p::{
-    core::{muxing::StreamMuxerBox, transport::Boxed},
-    floodsub::{self, Floodsub, FloodsubEvent},
-    mdns::{Mdns, MdnsEvent},
-    mplex,
+    floodsub::{self, Floodsub},
+    mdns::Mdns,
     Multiaddr,
-    NetworkBehaviour,
-    PeerId,
-    Swarm,
-    swarm::{NetworkBehaviourEventProcess, SwarmBuilder, SwarmEvent},
+    swarm::{SwarmBuilder, SwarmEvent},
 };
 use tokio::{
     io::{self, AsyncBufReadExt},
     select,
 };
 
-use crate::{chain::peer::Peer, settings::Settings};
-
-#[derive(NetworkBehaviour)]
-#[behaviour(event_process = true)]
-pub struct CustomBehaviour {
-    floodsub: Floodsub,
-    mdns: Mdns,
-}
-
-impl NetworkBehaviourEventProcess<FloodsubEvent> for CustomBehaviour {
-    fn inject_event(&mut self, message: FloodsubEvent) {
-        if let FloodsubEvent::Message(msg) = message {
-            println!(
-                "Received: '{:?}' from {:?}",
-                String::from_utf8_lossy(&msg.data),
-                msg.source
-            );
-        }
-    }
-}
-
-impl NetworkBehaviourEventProcess<MdnsEvent> for CustomBehaviour {
-    fn inject_event(&mut self, event: MdnsEvent) {
-        match event {
-            MdnsEvent::Discovered(list) => {
-                for (pid, _) in list {
-                    self.floodsub.add_node_to_partial_view(pid);
-                }
-            }
-            MdnsEvent::Expired(list) => {
-                for (pid, _) in list {
-                    if !self.mdns.has_node(&pid) {
-                        self.floodsub.remove_node_from_partial_view(&pid);
-                    }
-                }
-            }
-        }
-    }
-}
+use crate::network::{behaviour::CustomBehaviour, peer::Peer};
 
 #[derive(Clone, Debug)]
 pub struct Interface {
     pub peer: Peer,
-    pub settings: Settings,
 }
 
 impl Interface {
-    pub fn new(settings: Settings) -> Self {
+    pub fn new() -> Self {
         let peer = Peer::new();
         Self {
             peer: peer.clone(),
-            settings,
         }
     }
 
@@ -107,6 +62,8 @@ impl Interface {
 
         // Listen on all interfaces and whatever port the OS assigns
         swarm.listen_on("/ip4/0.0.0.0/tcp/0".parse()?)?;
+
+        // Run
         loop {
             select! {
                 line = stdin.next_line() => {

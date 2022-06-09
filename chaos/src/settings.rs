@@ -35,7 +35,7 @@ impl Settings {
             .set_default("logger.level", "info")?
             .set_default("server.port", 8000)?;
 
-        builder = builder.add_source(glob("**/*.config.*")
+        builder = builder.add_source(glob("**/*..config.*")
             .unwrap()
             .map(|path| File::from(path.unwrap()).required(false))
             .collect::<Vec<_>>()
