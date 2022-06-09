@@ -19,7 +19,6 @@ use acme::primitives::StandardError;
 use crate::{controller::settings::Settings, network::node::Node};
 
 mod apps;
-mod chains;
 mod consensus;
 mod controller;
 mod data;
