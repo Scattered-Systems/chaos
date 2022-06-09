@@ -1,14 +1,9 @@
 use futures::StreamExt;
 use libp2p::{
-    core::{muxing::StreamMuxerBox, transport::Boxed},
-    floodsub::{self, Floodsub, FloodsubEvent},
-    mdns::{Mdns, MdnsEvent},
-    mplex,
+    floodsub::{self, Floodsub},
+    mdns::Mdns,
     Multiaddr,
-    NetworkBehaviour,
-    PeerId,
-    Swarm,
-    swarm::{NetworkBehaviourEventProcess, SwarmBuilder, SwarmEvent},
+    swarm::{SwarmBuilder, SwarmEvent},
 };
 use tokio::{
     io::{self, AsyncBufReadExt},
