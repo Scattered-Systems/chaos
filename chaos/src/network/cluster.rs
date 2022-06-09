@@ -1,28 +1,15 @@
-use libp2p::{
-    mdns::Mdns,
-    NetworkBehaviour,
-    swarm::{Swarm, SwarmBuilder, SwarmEvent},
-};
+use crate::network::conduit::Conduit;
 
-trait Cusp {
-    type Behaviour;
-    fn swarm(&mut self) -> Swarm<Behaviour>;
-}
-
+// TODO - Create a simple interface that allows for swarm's to be quickly initialized
+#[derive(Clone)]
 pub struct Cluster {
-    pub conduit: crate::network::conduit::Conduit,
-    pub swarm: Swarm<TBehaviour>,
+    pub conduit: Conduit,
 }
 
 impl Cluster {
-    pub fn new(behaviour: Behaviour) -> SwarmBuilder {
-        let mut swarm = {
-            let mdns = Mdns::new(Default::default()).await?;
-            SwarmBuilder::new(transport, behaviour, peer.id.clone())
-                .executor(Box::new(|fut| {
-                    tokio::spawn(fut);
-                }))
-                .build()
-        };
+    pub fn new(conduit: Conduit) -> Self {
+        Self {
+            conduit: conduit.clone(),
+        }
     }
 }

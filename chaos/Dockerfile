@@ -6,7 +6,7 @@ ADD . /appseed
 WORKDIR /appseed
 
 COPY . .
-RUN cargo build --release
+RUN cargo build --release --package chaos --bin chaos
 
 FROM debian:buster-slim
 

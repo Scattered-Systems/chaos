@@ -4,7 +4,7 @@
         This structure is designed around a more robust asynchronous framework in Tokio.
 */
 
-use acme::primitives::AuthenticatedStaticKeys;
+use acme::primitives::{AuthenticatedStaticKeys, StaticKeys};
 use libp2p::{
     core::{muxing::StreamMuxerBox, transport::Boxed, upgrade},
     mplex,
@@ -20,14 +20,14 @@ pub type BoxedTransport = Boxed<(PeerId, StreamMuxerBox)>;
 
 #[derive(Clone)]
 pub struct Conduit {
-    dh_keys: AuthenticatedStaticKeys,
+    pub peer: Peer,
     pub transport: BoxedTransport,
 }
 
 impl Conduit {
     pub fn new(peer: &Peer) -> Self {
         // Generate a temporary, authenticated set of static keys for each instance of the Conduit
-        let dh_keys = noise::Keypair::<noise::X25519Spec>::new()
+        let dh_keys = StaticKeys::new()
             .into_authentic(&peer.key.clone())
             .expect("Signing Error: Failed to sign the static DH KeyPair");
 
@@ -39,7 +39,7 @@ impl Conduit {
             .multiplex(mplex::MplexConfig::new())
             .boxed();
         Self {
-            dh_keys: dh_keys.clone(),
+            peer: peer.clone(),
             transport: transport.clone(),
         }
     }
