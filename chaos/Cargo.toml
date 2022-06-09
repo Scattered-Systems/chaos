@@ -8,7 +8,7 @@ repository = "https://github.com/scattered-systems/chaos.git"
 version = "0.1.0"
 
 [dependencies]
-acme = "0.1.6"
+acme = "0.1.8"
 blake2 = "0.10.4"
 chrono = "0.4.19"
 config = "0.13.1"

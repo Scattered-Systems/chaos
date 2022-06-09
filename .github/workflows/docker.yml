@@ -1,4 +1,4 @@
-name: Docker
+name: Docker - Build and Push [chaos]
 
 on:
   push:
@@ -24,6 +24,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: code/crates/chaos
+          context: chaos
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/chaos:latest
