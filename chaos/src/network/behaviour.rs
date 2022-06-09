@@ -85,24 +85,20 @@ impl NetworkBehaviourEventProcess<ping::Event> for PrivateIpfsNetwork {
 
 #[derive(NetworkBehaviour)]
 #[behaviour(event_process = true)]
-pub struct CustomBehaviour {
+pub struct FloodsubMdnsBehaviour {
     pub floodsub: Floodsub,
     pub mdns: Mdns,
 }
 
-impl NetworkBehaviourEventProcess<FloodsubEvent> for CustomBehaviour {
+impl NetworkBehaviourEventProcess<FloodsubEvent> for FloodsubMdnsBehaviour {
     fn inject_event(&mut self, message: FloodsubEvent) {
         if let FloodsubEvent::Message(msg) = message {
-            println!(
-                "Received: '{:?}' from {:?}",
-                String::from_utf8_lossy(&msg.data),
-                msg.source
-            );
+            println!("Received: '{:?}' from {:?}", String::from_utf8_lossy(&msg.data), msg.source);
         }
     }
 }
 
-impl NetworkBehaviourEventProcess<MdnsEvent> for CustomBehaviour {
+impl NetworkBehaviourEventProcess<MdnsEvent> for FloodsubMdnsBehaviour {
     fn inject_event(&mut self, event: MdnsEvent) {
         match event {
             MdnsEvent::Discovered(list) => {
