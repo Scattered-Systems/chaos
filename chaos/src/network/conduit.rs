@@ -21,6 +21,7 @@ pub type BoxedTransport = Boxed<(PeerId, StreamMuxerBox)>;
 #[derive(Clone)]
 pub struct Conduit {
     dh_keys: AuthenticatedStaticKeys,
+    pub peer: Peer,
     pub transport: BoxedTransport,
 }
 
@@ -40,6 +41,7 @@ impl Conduit {
             .boxed();
         Self {
             dh_keys: dh_keys.clone(),
+            peer: peer.clone(),
             transport: transport.clone(),
         }
     }
