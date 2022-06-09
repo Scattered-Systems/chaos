@@ -1,10 +1,12 @@
 use std::error::Error;
 
-use crate::chains::interface::Interface;
+use crate::interface::Interface;
 use crate::settings::Settings;
 
-mod chains;
+mod blockchain;
 mod data;
+mod interface;
+mod network;
 mod settings;
 
 #[tokio::main]
@@ -13,7 +15,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync + 'static>> {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    prinln!("{:#?}", settings.clone());
+    println!("{:#?}", settings.clone());
 
     let interface = Interface::new();
     Interface::run(&interface).await?;

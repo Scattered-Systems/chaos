@@ -23,7 +23,7 @@ pub struct Block {
 }
 
 impl Block {
-    pub fn new(nonce: usize, previous: String, transactions: Bundle) -> Self {
+    pub fn new(nonce: usize, previous: String, transactions: Vec<Transaction>) -> Self {
         Self {
             id: ObjectId::new(),
             hash: String::from(""),
