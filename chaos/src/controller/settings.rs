@@ -27,11 +27,13 @@ pub struct Settings {
 }
 
 impl Settings {
-    pub fn new() -> Result<Self, ConfigError> {
+    pub fn new(mode: &str, name: &str) -> Result<Self, ConfigError> {
+        let mode = "development";
+        let name = "Application";
         let mut builder = Config::builder()
-            .set_default("application.mode", "development")?
-            .set_default("application.name", "Application")?
-            .set_default("application.slug", "application")?
+            .set_default("application.mode", mode.clone())?
+            .set_default("application.name", name.clone())?
+            .set_default("application.slug", name.to_lowercase().to_string())?
             .set_default("logger.level", "info")?
             .set_default("server.port", 8000)?;
 
