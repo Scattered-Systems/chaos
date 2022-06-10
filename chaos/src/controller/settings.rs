@@ -19,6 +19,12 @@ pub struct Server {
     pub port: u16,
 }
 
+impl std::fmt::Display for Server {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Server(host=[0, 0, 0, 0], port={})", self.port)
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Settings {
     pub application: Application,
@@ -27,13 +33,13 @@ pub struct Settings {
 }
 
 impl Settings {
-    pub fn new(mode: &str, name: &str) -> Result<Self, ConfigError> {
+    pub fn new() -> Result<Self, ConfigError> {
         let mode = "development";
         let name = "Application";
         let mut builder = Config::builder()
             .set_default("application.mode", mode.clone())?
             .set_default("application.name", name.clone())?
-            .set_default("application.slug", name.to_lowercase().to_string())?
+            .set_default("application.slug", name.to_lowercase())?
             .set_default("logger.level", "info")?
             .set_default("server.port", 8000)?;
 
@@ -55,6 +61,6 @@ impl Settings {
 
 impl std::fmt::Display for Settings {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Initializing application...")
+        write!(f, "Application(mode={}, name={}, slug={})", self.application.mode, self.application.name, self.application.slug)
     }
 }

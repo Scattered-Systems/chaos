@@ -14,7 +14,7 @@
         userful IoT features.
  */
 
-use acme::primitives::StandardError;
+use acme::primitives::errors::DynamicError;
 
 use crate::{controller::settings::Settings, network::node::Node};
 
@@ -25,7 +25,7 @@ mod data;
 mod network;
 
 #[tokio::main]
-async fn main() -> Result<(), StandardError> {
+async fn main() -> Result<(), DynamicError> {
     // TODO - Create a standard, asynchronous configurator and integrated into the interface
     let settings = match Settings::new() {
         Ok(value) => value,

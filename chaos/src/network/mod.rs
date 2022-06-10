@@ -1,5 +1,2 @@
-pub mod behaviour;
-pub mod cluster;
-pub mod conduit;
+pub mod behaviours;
 pub mod node;
-pub mod peer;

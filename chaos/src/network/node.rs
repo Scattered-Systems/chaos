@@ -1,40 +1,41 @@
-use acme::primitives::StandardError;
 use futures::StreamExt;
 use libp2p::{
     floodsub::{Floodsub, Topic},
     mdns::Mdns,
-    Multiaddr,
-    swarm::{SwarmBuilder, SwarmEvent},
+    swarm::{SwarmBuilder, SwarmEvent}
 };
 use tokio::io::AsyncBufReadExt;
 
-use crate::network::{behaviour::FloodsubMdnsBehaviour, conduit::Conduit, peer::Peer};
+use acme::{
+    chains::network::{Peer, utils::build_transport}, 
+    primitives::{
+        errors::DynamicError,
+        identifiers::NetworkAddress
+    },
+};
+use crate::network::behaviours::flood::FloodsubMdnsBehaviour;
 
-// TODO: Move primitive type into the acme crate
-pub type NetworkAddress = Multiaddr;
-
+// TODO - Refine the node interface and define better network behaviours
 #[derive(Clone)]
 pub struct Node {
-    pub conduit: Conduit,
     pub peer: Peer,
 }
 
 impl Node {
     pub fn new() -> Self {
         let peer = Peer::new();
-        let conduit = Conduit::new(&peer);
         Self {
-            conduit: conduit.clone(),
             peer: peer.clone(),
         }
     }
-    pub async fn run(&self) -> Result<(), StandardError> {
+
+    pub async fn run(&self) -> Result<(), DynamicError> {
         pretty_env_logger::init();
 
         let floodsub_topic: Topic = Topic::new("chat");
 
         let peer = Peer::new();
-        let transport = Peer::transport(&peer);
+        let transport = build_transport(&peer);
         println!("{}", peer.clone());
 
         let mut swarm = {
