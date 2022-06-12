@@ -1,8 +1,10 @@
 {
+	"build": {
+		"context": "..",
+		"dockerfile": "apps/chaos/Dockerfile"
+	},
 	"name": "Chaos",
-	"dockerComposeFile": "../deploy/docker-compose.yml",
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
 		"lldb.executable": "/usr/bin/lldb"
 	},
 	"extensions": [
