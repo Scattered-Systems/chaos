@@ -1,12 +1,10 @@
 {
 	"build": {
-		"context": "..",
-		"dockerfile": "apps/chaos/Dockerfile"
+		"dockerfile": "workspace.dockerfile"
 	},
-	"name": "Chaos",
-	"settings": {
-		"lldb.executable": "/usr/bin/lldb"
-	},
+	"dockerComposeFile": [
+		"docker-compose.workspace.yaml"
+	],
 	"extensions": [
 		"rust-lang.rust",
 		"bungcip.better-toml",
@@ -22,11 +20,16 @@
 		9096,
 		9999
 	],
+	"name": "Chaos",
 	"onCreateCommand": [
 		"rustup install toolchain nightly",
 		"cargo build --release",
 		"cargo check"
 	],
-	"postStartCommand": "./target/debug/chaos --dev --ws-external"
+	"postStartCommand": "./target/debug/chaos --dev --ws-external",
+	"service": "workspace",
+	"settings": {
+		"lldb.executable": "/usr/bin/lldb"
+	}
 }
 
