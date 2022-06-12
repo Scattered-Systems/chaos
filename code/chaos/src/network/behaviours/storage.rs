@@ -27,33 +27,8 @@ pub enum NetworkProcesses {
     MDNS(MdnsEvent),
 }
 
-pub struct Interface<T> {
-    pub behaviour: StorageBehaviour,
-    pub peer: Peer,
-    pub swarm: Swarm<T>,
-    pub transport: BoxedTransport,
-}
-
-impl Interface<T> {
-    pub fn new(peer: Peer, transport: BoxedTransport) -> Self {
-        let store = MemoryStore::new(peer.id.clone());
-        let kademlia = Kademlia::new(peer.id.clone(), store);
-        let mdns = task::block_on(Mdns::new(MdnsConfig::default()))?;
-        let behaviour = MyBehaviour { kademlia, mdns };
-        let mut swarm = {
-            Swarm::new(transport.clone(), behaviour, local_peer_id)
-        };
-        Self {
-            behaviour,
-            peer: peer.clone(),
-            swarm,
-            transport: transport.clone(),
-        }
-    }
-}
-
 // TODO - Finish implementing the network behaviour for storing Key-Value pairs
-#[NetworkBehaviour]
+#[derive(NetworkBehaviour)]
 #[behaviour(event_process = true)]
 pub struct StorageBehaviour {
     pub kademlia: Kad,

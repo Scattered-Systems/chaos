@@ -4,11 +4,11 @@ description = ""
 edition = "2021"
 license = "MIT"
 name = "chaos"
-repository = "https://github.com/scattered-systems/chaos.git"
+repository = "https://github.com/scattered-systems/chaos/code/chaos"
 version = "0.1.1"
 
 [dependencies]
-acme = "0.1.10"
+acme = "0.1.11"
 blake2 = "0.10.4"
 chrono = "0.4.19"
 config = "0.13.1"

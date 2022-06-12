@@ -10,9 +10,9 @@ RUN cargo build --release
 
 FROM debian:buster-slim
 
-COPY --from=builder /app/target/release/chaos /app/chaos
+COPY --from=builder /app/target/release/chaos /chaos
 
 ENV DEV_MODE=false \
     PORT=8000
 EXPOSE ${PORT}
-CMD ["./app/chaos"]
+CMD ["./chaos"]

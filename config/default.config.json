@@ -1,0 +1,10 @@
+{
+  "application": {
+    "mode": true,
+    "name": "Chaos",
+    "slug": "chaos"
+  },
+  "logger": {
+    "level": "info"
+  }
+}
