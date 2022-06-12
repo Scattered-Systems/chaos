@@ -5,10 +5,6 @@ pub type KV<T> = std::collections::HashMap<String, T>;
 pub type Length = usize;
 
 
-pub struct Constants {
-    pub prefixes: Vec<Pre>,
-}
-
 pub trait NetworkPeer {
     type Address;
     type ContentId;
@@ -20,7 +16,7 @@ pub trait NetworkPeer {
 pub trait Node {
     type L;
 
-    fn setup(&mut self) -> dyn Node;
+    fn setup(&mut self) -> Self;
     fn run(&mut self) -> Self;
 }
 

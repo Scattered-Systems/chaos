@@ -40,22 +40,17 @@ impl Settings {
             .set_default("application.name", name.clone())?
             .set_default("application.slug", name.to_lowercase())?
             .set_default("logger.level", "info")?
-            .set_default("server.port", 8000)?;
+            .set_default("peer.port", 9999)?;
 
-        builder = builder.add_source(glob("**/*.contracts.*")
+        builder = builder.add_source(glob("**/*.config.*")
             .unwrap()
             .map(|path| File::from(path.unwrap()).required(false))
             .collect::<Vec<_>>()
         );
 
-        builder = builder.add_source(Environment::default().separator("__"));
-        if let Ok(dev_mode) = std::env::var("DEV_MODE") {
-            builder = builder
-                .set_override("application.mode", dev_mode)?;
-        }
         if let Ok(port) = std::env::var("PORT") {
             builder = builder
-                .set_override("server.port", port)?;
+                .set_override("peer.port", port)?;
         }
         builder.build()?.try_deserialize()
     }
