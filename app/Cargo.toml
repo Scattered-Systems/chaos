@@ -7,6 +7,12 @@ name = "chaos"
 repository = "https://github.com/scattered-systems/chaos/code/chaos"
 version = "0.1.2"
 
+[[bin]]
+bench = false
+name = "chaos"
+path = "src/main.rs"
+test = false
+
 [dependencies]
 acme = "0.1.11"
 blake2 = "0.10.4"
