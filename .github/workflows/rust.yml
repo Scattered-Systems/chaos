@@ -1,0 +1,23 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "*", "!dev" ]
+  pull_request:
+    branches: [ "*", "!dev" ]
+
+env:
+  CARGO_PACKAGE_ONE: contained
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login
+        run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      - name: Test ($CARGO_PACKAGE_ONE)
+        run: cargo test --package $CARGO_PACKAGE_ONE --verbose
+      - name: Build and Push ($CARGO_PACKAGE_ONE)
+        run: cargo publish --package $CARGO_PACKAGE_ONE --verbose
