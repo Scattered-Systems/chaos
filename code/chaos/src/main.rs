@@ -12,11 +12,22 @@
         roles in the Scattered Ecosystem, enabling the gateway to leverage the full might of
         cloud-based technologies while furthering the experience by incorporating a number of
         userful IoT features.
+
+    Users:
+        Run the application in two terminals, if your computer allows for mDNS than the nodes
+        will automatically connect enabling you to input the commands below to store values on your
+        network
+        Commands
+            * GET <key> <value>
+            * GET_PROVIDERS <key>
+            * PUT <key>
+            * PUT_PROVIDER <key>
  */
 
-use acme::primitives::StandardError;
+use acme::primitives::errors::DynamicError;
 
-use crate::{controller::settings::Settings, network::node::Node};
+use crate::controller::settings::Settings;
+use crate::network::node::Node;
 
 mod apps;
 mod consensus;
@@ -25,16 +36,12 @@ mod data;
 mod network;
 
 #[tokio::main]
-async fn main() -> Result<(), StandardError> {
-    // TODO - Create a standard, asynchronous configurator and integrated into the interface
+async fn main() -> Result<(), DynamicError> {
+    // TODO - Create a standard, asynchronous configurator for network nodes
     let settings = match Settings::new() {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    println!("{:#?}", settings.clone());
-
-    // Create an node instance to run a self-hosted decentralized, private Virtual File System
-    let instance = Node::new();
-    Node::run(&instance).await?;
+    Node::new().run().await?;
     Ok(())
 }

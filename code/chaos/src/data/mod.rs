@@ -8,6 +8,4 @@
  */
 
 pub mod proofs;
-pub mod stateful;
 pub mod structures;
-pub mod validate;

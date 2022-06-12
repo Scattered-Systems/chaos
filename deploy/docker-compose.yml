@@ -2,14 +2,14 @@ version: "3.9"
 services:
   application:
     build:
-      context: ../chaos
+      context: ../code/chaos
       dockerfile: Dockerfile
-    container_name: application
+    container_name: chaos
     ports:
-      - "8000:8080"
+      - "8000:8000"
     restart: always
     volumes:
-      - ./artifacts/docker/data/chaos:/data
+      - /data/chaos:/data
 
   cache:
     container_name: cache
@@ -18,11 +18,11 @@ services:
       - "6379:6379"
     restart: always
 
-  cluster:
-    container_name: cluster
+  cluster-master:
+    container_name: cluster-master
     image: ipfs/ipfs-cluster
     depends_on:
-      - datastore
+      - ipfs-master
     environment:
       CLUSTER_PEERNAME: cluster
       CLUSTER_SECRET: ${CLUSTER_SECRET}
@@ -34,18 +34,17 @@ services:
       - "9094:9094"
       - "9096:9096"
     volumes:
-      - ./artifacts/docker/data/cluster/0:/data/ipfs-cluster
+      - /data/cluster/0:/data/ipfs-cluster
 
-  datastore:
-    container_name: datastore
+  ipfs-master:
+    container_name: ipfs-master
     image: ipfs/go-ipfs
     ports:
       - "4001:4001"
       - "5001:5001"
       - "8080:8080"
     volumes:
-      - ./artifacts/docker/data/ipfs/0:/data/ipfs
+      - /data/ipfs/peers/0:/data/ipfs
 
 volumes:
   data:
-    driver: local
