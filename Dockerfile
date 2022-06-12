@@ -13,7 +13,7 @@ RUN apt-get install -y cmake pkg-config
 RUN apt-get install -y libatk1.0.0 libcairo2-dev libffi-dev libglib2.0-dev libpcre2-dev libsdl-pango-dev
 RUN rustup toolchain install nightly && rustup target add wasm32-unknown-unknown --toolchain nightly
 RUN rustup toolchain install stable-gnu
-RUN rustup default nightly
+RUN rustup default stable
 RUN apt-get update -y
 
 FROM builder-base as builder
