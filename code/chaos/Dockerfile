@@ -6,11 +6,11 @@ RUN apt-get update
 # Get Ubuntu packages
 RUN apt-get install -y \
     build-essential \
+    cmake \
     curl
 
 # Update new packages
 RUN apt-get update
-RUN apt-get install -y cmake
 
 # Get Rust
 RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
@@ -32,5 +32,6 @@ COPY --from=builder /app/target/release/chaos /chaos
 
 ENV DEV_MODE=false \
     PORT=8000
+
 EXPOSE ${PORT}
 CMD ["./chaos"]
