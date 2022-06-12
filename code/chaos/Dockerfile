@@ -1,6 +1,6 @@
 FROM rust as builder
 
-RUN update-ca-certificates
+RUN update-ca-certificates && apt-get cmake
 
 ADD . /app
 WORKDIR /app
