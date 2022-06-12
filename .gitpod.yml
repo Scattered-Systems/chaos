@@ -1,5 +1,3 @@
 tasks:
   - init: cargo build --package chaos --bin chaos --release --verbose --color always
     command: cargo watch -x run
-
-

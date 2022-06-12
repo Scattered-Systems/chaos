@@ -39,7 +39,7 @@ impl Node {
         let peer = Peer::new();
         Self {
             peer: peer.clone(),
-            settings: Settings.clone(),
+            settings: settings.clone(),
         }
     }
 

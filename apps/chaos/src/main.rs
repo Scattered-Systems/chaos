@@ -37,6 +37,6 @@ async fn main() -> Result<(), acme::primitives::errors::DynamicError> {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    network::Node::new(settings: settings.clone()).run().await?;
+    network::node::Node::new(settings.clone()).run().await?;
     Ok(())
 }
