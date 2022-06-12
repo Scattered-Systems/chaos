@@ -2,9 +2,13 @@ name: Docker - Build and Push [chaos]
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "*", "!dev" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "*", "!dev" ]
+
+env:
+  BIN_NAME: chaos
+  BUILDER_CONTEXT_PREFIX: code/apps
 
 jobs:
   docker:
@@ -24,6 +28,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: code/chaos
+          context: $BUILDER_CONTEXT_PREFIX/$BIN_NAME
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/chaos:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/$BIN_NAME:latest

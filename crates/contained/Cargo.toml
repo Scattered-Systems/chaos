@@ -1,0 +1,22 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
+description = ""
+edition = "2021"
+license = "MIT"
+name = "contained"
+repository = "https://github.com/scattered-systems/chaos/code/crates/contained"
+version = "0.1.1"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "contained"
+path = "src/lib.rs"
+test = true
+
+[[test]]
+name = "test"
+path = "tests/test.rs"
+test = true
+
+[dependencies]
+acme = "0.1.11"

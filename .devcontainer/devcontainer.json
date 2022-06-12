@@ -1,0 +1,30 @@
+{
+	"name": "Chaos",
+	"dockerComposeFile": "../deploy/docker-compose.yml",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"lldb.executable": "/usr/bin/lldb"
+	},
+	"extensions": [
+		"rust-lang.rust",
+		"bungcip.better-toml",
+		"vadimcn.vscode-lldb"
+	],
+	"forwardPorts": [
+		3000,
+		4001,
+		5001,
+		6379,
+		8080,
+		9094,
+		9096,
+		9999
+	],
+	"onCreateCommand": [
+		"rustup install toolchain nightly",
+		"cargo build --release",
+		"cargo check"
+	],
+	"postStartCommand": "./target/debug/chaos --dev --ws-external"
+}
+
