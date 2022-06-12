@@ -26,10 +26,10 @@ RUN cargo build --release --package chaos --bin chaos
 
 FROM debian:buster-slim
 
-COPY --from=builder /app/target/release/chaos /chaos
+COPY --from=builder /app/target/release/chaos /app/chaos
 
 ENV DEV_MODE=false \
     PORT=9999
 
 EXPOSE ${PORT}
-CMD ["./chaos"]
+CMD ["./app/chaos"]
