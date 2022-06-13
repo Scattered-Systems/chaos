@@ -23,7 +23,7 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-mod apps;
+mod app;
 mod core;
 mod controller;
 mod data;
