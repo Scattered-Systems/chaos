@@ -16,7 +16,7 @@ test = false
 [dependencies]
 blake2 = "0.10.4"
 chrono = "0.4.19"
-clap = "0.11.0"
+clap = { features = ["derive"], version = "3.2.1" }
 config = "0.13.1"
 disaronno = { features = ["macros"], version = "0.1.5" }
 futures = "0.3.21"
