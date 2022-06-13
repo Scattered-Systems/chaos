@@ -23,17 +23,16 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-mod consensus;
+mod apps;
+mod core;
 mod controller;
 mod data;
-mod interface;
 mod network;
-mod settings;
 
 #[tokio::main]
-async fn main() -> Result<(), acme::primitives::errors::DynamicError> {
+async fn main() -> Result<(), disaronno::types::DynamicError> {
     // TODO - Create a standard, asynchronous configurator for network nodes
-    let settings = match settings::Settings::new() {
+    let settings = match core::settings::Settings::new() {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };

@@ -1,5 +1,7 @@
-use acme::chain::networking::peer::Peer;
-use acme::primitives::networking::BoxedTransport;
+use disaronno::{
+    networking::peers::Peer,
+    types::BoxedTransport,
+};
 
 pub type KV<T> = std::collections::HashMap<String, T>;
 pub type Length = usize;
@@ -10,7 +12,7 @@ pub trait NetworkPeer {
     type ContentId;
 
     fn new() -> Self;
-    fn build_transport(&mut self) -> acme::primitives::networking::BoxedTransport;
+    fn build_transport(&mut self) -> BoxedTransport;
 }
 
 pub trait Node {

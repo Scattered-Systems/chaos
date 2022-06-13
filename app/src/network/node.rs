@@ -1,10 +1,6 @@
-use acme::{
-    chain::networking::peer::Peer,
-    primitives::{
-        errors::DynamicError,
-        identifiers::NetworkAddress,
-        networking::BoxedTransport,
-    },
+use disaronno::{
+    networking::peers::Peer,
+    types::{BoxedTransport, DynamicError, NetworkAddress},
 };
 use futures::StreamExt;
 use libp2p::{
@@ -19,12 +15,11 @@ use libp2p::{
     },
     mdns::{Mdns, MdnsConfig},
     swarm::{SwarmBuilder, SwarmEvent},
-    Swarm,
 };
-use tokio::{io::{self, AsyncBufReadExt}, task};
+use tokio::{io::{self, AsyncBufReadExt}};
 
+use crate::core::settings::Settings;
 use crate::network::behaviours::storage::StorageBehaviour;
-use crate::settings::Settings;
 
 // TODO - Refine the structure into a trait and/or proc_macro
 
