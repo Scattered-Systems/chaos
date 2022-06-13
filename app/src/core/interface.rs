@@ -3,7 +3,6 @@ use disaronno::{
     types::BoxedTransport,
 };
 
-pub type KV<T> = std::collections::HashMap<String, T>;
 pub type Length = usize;
 
 

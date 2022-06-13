@@ -1,54 +1,19 @@
-FROM ubuntu as base
+FROM jo3mccain/crust as builder
 
-RUN apt-get update -y
+RUN rustup default stable
 
-RUN apt-get install -y  \
-    build-essential  \
-    curl
-
-RUN apt-get update -y
-
-RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
-
-ENV PATH="/root/.cargo/bin:${PATH}"
-
-FROM base as builder-base
-
-RUN apt-get install -y  \
-    cmake  \
-    nodejs  \
-    npm  \
-    pkg-config  \
-    yarn
-
-
-RUN apt-get install -y  \
-    libatk1.0.0  \
-    libcairo2-dev  \
-    libffi-dev  \
-    libglib2.0-dev  \
-    libpcre2-dev  \
-    libsdl-pango-dev
-
-
-RUN rustup toolchain install nightly && rustup target add wasm32-unknown-unknown --toolchain nightly
-RUN rustup toolchain install stable-gnu && rustup default stable
-RUN apt-get update -y
-
-FROM builder-base as builder
-
-ADD . /app
-WORKDIR /app
+ADD . /project
+WORKDIR /project
 
 COPY . .
 RUN cargo build --release --package chaos --bin chaos
 
 FROM debian:buster-slim
 
-COPY --from=builder /app/target/release/chaos /app/chaos
+COPY --from=builder /project/target/release/chaos /project/chaos
 
 ENV DEV_MODE=false \
     PORT=9999
 
 EXPOSE ${PORT}
-CMD ["./app/chaos"]
+CMD ["./project/chaos"]

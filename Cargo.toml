@@ -1,5 +1,3 @@
 [workspace]
-members = [
-    "app",
-    "crates/*"
-]
+default-members = ["app"]
+members = ["app", "crates/contained"]

@@ -1,6 +1,6 @@
 use disaronno::{
     networking::peers::Peer,
-    types::{BoxedTransport, DynamicError, NetworkAddress},
+    types::{DynamicError, NetworkAddress},
 };
 use futures::StreamExt;
 use libp2p::{
@@ -48,7 +48,7 @@ impl Node {
         let store = MemoryStore::new(peer.id.clone());
         let kademlia = Kademlia::new(peer.id.clone(), store);
         let mdns = Mdns::new(MdnsConfig::default()).await?;
-        let mut behaviour = StorageBehaviour { kademlia, mdns };
+        let behaviour = StorageBehaviour { kademlia, mdns };
 
         let mut swarm = {
             SwarmBuilder::new(transport, behaviour, peer.id.clone())

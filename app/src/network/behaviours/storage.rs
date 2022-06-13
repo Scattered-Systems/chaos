@@ -1,4 +1,3 @@
-use disaronno::{networking::peers::Peer, types::BoxedTransport};
 use libp2p::{
     kad::{
         AddProviderOk,
@@ -16,15 +15,6 @@ use libp2p::{
 };
 
 pub type Kad = Kademlia<MemoryStore>;
-
-pub enum Results {
-    Query(QueryResult)
-}
-
-pub enum NetworkProcesses {
-    Kad(KademliaEvent),
-    MDNS(MdnsEvent),
-}
 
 // TODO - Finish implementing the network behaviour for storing Key-Value pairs
 #[derive(NetworkBehaviour)]

@@ -20,4 +20,4 @@ jobs:
       - name: Test
         run: cargo test --package $PACKAGE_NAME --verbose
       - name: Build and Push
-        run: cargo publish --package $PACKAGE_NAME --verbose
+        run: cargo publish --package $PACKAGE_NAME --verbose --color

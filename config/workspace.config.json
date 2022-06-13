@@ -6,8 +6,5 @@
   },
   "logger": {
     "level": "info"
-  },
-  "peer": {
-    "port": 9999
   }
 }
