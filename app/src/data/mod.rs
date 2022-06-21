@@ -6,3 +6,7 @@
 pub mod primitives;
 pub mod proofs;
 pub mod structures;
+
+pub use primitives::*;
+pub use proofs::*;
+pub use structures::*;
