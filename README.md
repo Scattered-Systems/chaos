@@ -1,6 +1,7 @@
 # Chaos
-[![Docker](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml/badge.svg?branch=master)](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml)
-[![Rust](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml/badge.svg?branch=master)](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml)
+[![Analyze Code (Clippy)](https://github.com/Scattered-Systems/chaos/actions/workflows/rust-clippy.yml/badge.svg)](https://github.com/Scattered-Systems/chaos/actions/workflows/rust-clippy.yml)
+[![Docker](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml/badge.svg)](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml)
+[![Rust](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml/badge.svg)](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml)
 
 Welcome to Chaos, a virtualized storage solution with an internal blockchain driving each of the interactions.
 Chaos is designed to replace traditional cloud storage providers, giving user's a hyper-secure and globally accessible
