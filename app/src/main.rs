@@ -32,7 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    let interface = Interface::constructor(settings.clone());
+    let interface = Interface::new(settings.clone());
     println!("{:#?}", &interface);
     Ok(())
 }

@@ -9,9 +9,9 @@ pub struct Interface {
 }
 
 impl Interface {
-    pub fn constructor(configuration: Configuration) -> Self {
+    pub fn new(configuration: Configuration) -> Self {
         Self {
-            context: Context::constructor(configuration.clone()),
+            context: Context::new(configuration.clone()),
             peer: Peer::new().clone()
         }
     }
