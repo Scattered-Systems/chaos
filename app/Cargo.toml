@@ -4,7 +4,7 @@ description = "A lightweight IPFS client designed for an optimized, end-user exp
 edition = "2021"
 keywords = ["blockchain", "cloud-storage", "decentralized", "scsys"]
 license = "MIT"
-name = "chaos"
+name = "disarray"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/chaos.git"
 version = "0.1.2"
@@ -21,7 +21,7 @@ test = false
 
 [[bin]]
 bench = false
-name = "chaos-cli"
+name = "chaos"
 path = "src/main.rs"
 test = false
 
