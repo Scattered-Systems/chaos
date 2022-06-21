@@ -1,6 +1,6 @@
 #[doc(inline)]
 #[cfg(feature = "default")]
-pub use contained::*;
+pub use disarray_core::*;
 
 mod actors;
 mod controllers;
