@@ -5,8 +5,8 @@
     Description:
  */
 
-pub mod application;
-pub use application::*;
+pub mod cli;
+pub use cli::*;
 
 pub enum AppStates {
     Abort,

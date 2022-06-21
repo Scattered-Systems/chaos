@@ -23,7 +23,59 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-use disarray::{Interface, Configuration};
+use disarray::{Configuration, Context, CLI};
+
+use acme::Peer;
+use clap::Parser;
+
+#[derive(Clone, Debug, Parser)]
+pub struct Commands {
+
+    #[clap(default_value = "chaos", long, short, value_parser)]
+    pub appellation: String,
+
+    #[clap(default_value = "scaffold", long, value_parser)]
+    pub chain: String,
+
+    #[clap(default_value = "false", long, value_parser)]
+    pub cluster: String,
+
+
+    #[clap(default_value = "", long, short, value_parser)]
+    pub data: String
+
+}
+
+#[derive(Clone, Debug)]
+pub struct App {
+    pub context: Context,
+    pub peer: Peer
+}
+
+impl App {
+    pub fn new(configuration: Configuration) -> Self {
+        let context = Context::new(configuration.clone());
+        let peer = Peer::new();
+        Self {
+            context: context.clone(),
+            peer: peer.clone()
+        }
+    }
+}
+
+impl CLI for App {
+    type Commands = Commands;
+
+    fn constructor(&self) -> Self::Commands {
+        return Commands::parse()
+    }
+}
+
+impl std::fmt::Display for App {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Interface(context={})", self.context)
+    }
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
@@ -32,7 +84,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    let interface = Interface::new(settings.clone());
-    println!("{:#?}", &interface);
+    let interface = App::new(settings.clone());
+    let args = interface.constructor();
+    println!("{:#?}", args);
     Ok(())
 }

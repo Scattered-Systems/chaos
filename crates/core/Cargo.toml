@@ -1,17 +1,19 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
-description = "Supporting crate for Chaos, a decentralized storage solution"
+description = "Supporting crate for Chaos, a unique cloud storage solution focused on security"
 edition = "2021"
 license = "MIT"
-name = "contained"
-repository = "https://github.com/scattered-systems/chaos/code/crates/contained"
+name = "disarray-core"
+readme = "README.md"
+repository = "https://github.com/scattered-systems/chaos"
 version = "0.1.1"
+
+[features]
+default = []
 
 [lib]
 bench = false
 crate-type = ["cdylib", "rlib"]
-name = "contained"
-path = "src/lib.rs"
 test = true
 
 [[test]]
