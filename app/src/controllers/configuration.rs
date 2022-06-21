@@ -3,12 +3,12 @@ use glob::glob;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-pub struct Settings {
+pub struct Configuration {
     pub application: crate::Application,
     pub logger: crate::Logger
 }
 
-impl Settings {
+impl Configuration {
     pub fn new() -> Result<Self, ConfigError> {
         let project = "Chaos";
         let mut builder = Config::builder()
@@ -24,7 +24,7 @@ impl Settings {
     }
 }
 
-impl std::fmt::Display for Settings {
+impl std::fmt::Display for Configuration {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "Settings for {}", self.application.appellation)
     }

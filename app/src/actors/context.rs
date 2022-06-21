@@ -5,19 +5,25 @@
     Description:
         ... Summary ...
  */
-use crate::Settings;
+use crate::{Configuration, Commands};
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Context {
-    pub configuration: Settings
+    pub configuration: Configuration
 }
 
 impl Context {
-    pub fn constructor(configuration: Settings) -> Self {
+    pub fn constructor(configuration: Configuration) -> Self {
         Self {
-            configuration
+            configuration,
+
         }
     }
 }
 
+impl std::fmt::Display for Context {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Context(configuration={})", self.configuration)
+    }
+}
