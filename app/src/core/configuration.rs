@@ -11,8 +11,10 @@ pub struct Configuration {
 impl Configuration {
     pub fn new() -> Result<Self, ConfigError> {
         let project = "Chaos";
+        let description = "Built with Clap";
         let mut builder = Config::builder()
             .set_default("application.appellation", project.to_lowercase())?
+            .set_default("application.description", description)?
             .set_default("logger.level", "debug")?;
 
         builder = builder.add_source(glob("**/*.config.*")

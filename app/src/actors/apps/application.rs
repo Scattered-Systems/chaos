@@ -2,12 +2,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub struct Application {
-    pub appellation: String
+    pub appellation: String,
+    pub description: String
+
 }
 
 impl Application {
-    pub fn constructor(configuration: String) -> Self {
-        todo!()
+    pub fn new(appellation: String, description: String) -> Self {
+        Self {
+            appellation, description
+        }
     }
 }
 

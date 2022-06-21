@@ -6,12 +6,10 @@
  */
 mod actor;
 pub mod apps;
-mod context;
 pub mod loggers;
 
 pub use actor::*;
 pub use apps::*;
-pub use context::*;
 pub use loggers::*;
 
 pub trait CLI {
