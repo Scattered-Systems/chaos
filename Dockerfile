@@ -15,5 +15,5 @@ COPY --from=builder /project/target/release/chaos /chaos
 ENV DEV_MODE=false \
     PORT=8888
 
-EXPOSE ${PORT}
-CMD ["./chaos"]
+EXPOSE ${PORT}\tcp
+ENTRYPOINT ["./chaos"]
