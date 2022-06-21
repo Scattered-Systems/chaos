@@ -23,7 +23,7 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-use disarray::{Interface, Configuration};
+use disarray::{Interface, Configuration, CLI};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>> {
@@ -33,6 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync + 'static>
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
     let interface = Interface::new(settings.clone());
-    println!("{:#?}", &interface);
+    let args = interface.constructor();
+    println!("{:#?}", args);
     Ok(())
 }

@@ -15,5 +15,5 @@ pub use loggers::*;
 pub trait CLI {
     type Commands;
 
-    fn constructor() -> Self::Commands;
+    fn constructor(&self) -> Self::Commands;
 }

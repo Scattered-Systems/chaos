@@ -10,9 +10,11 @@ pub struct Interface {
 
 impl Interface {
     pub fn new(configuration: Configuration) -> Self {
+        let context = Context::new(configuration.clone());
+        let peer = Peer::new();
         Self {
-            context: Context::new(configuration.clone()),
-            peer: Peer::new().clone()
+            context: context.clone(),
+            peer: peer.clone()
         }
     }
 }
@@ -20,8 +22,8 @@ impl Interface {
 impl crate::CLI for Interface {
     type Commands = crate::Commands;
 
-    fn constructor() -> Self::Commands {
-        return Self::Commands::parse()
+    fn constructor(&self) -> Self::Commands {
+        return crate::Commands::parse()
     }
 }
 
