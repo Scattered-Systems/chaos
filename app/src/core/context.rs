@@ -5,7 +5,7 @@
     Description:
         ... Summary ...
  */
-use crate::{Configuration, Commands};
+use crate::Configuration;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -14,7 +14,7 @@ pub struct Context {
 }
 
 impl Context {
-    pub fn constructor(configuration: Configuration) -> Self {
+    pub fn new(configuration: Configuration) -> Self {
         Self {
             configuration,
 
