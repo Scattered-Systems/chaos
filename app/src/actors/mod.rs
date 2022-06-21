@@ -13,3 +13,9 @@ pub use actor::*;
 pub use apps::*;
 pub use context::*;
 pub use loggers::*;
+
+pub trait CLI {
+    type Commands;
+
+    fn constructor() -> Self::Commands;
+}

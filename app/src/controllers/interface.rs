@@ -1,26 +1,32 @@
 use acme::Peer;
-use serde::{Deserialize, Serialize};
+use clap::Parser;
+use crate::{Configuration, Context};
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug)]
 pub struct Interface {
-    pub configuration: crate::Settings,
+    pub context: Context,
+    pub peer: Peer
 }
 
 impl Interface {
-    pub fn new(configuration: crate::Settings) -> Self {
+    pub fn constructor(configuration: Configuration) -> Self {
         Self {
-            configuration
+            context: Context::constructor(configuration.clone()),
+            peer: Peer::new().clone()
         }
     }
+}
 
-    pub fn constructor() -> Peer {
-        let peer = Peer::new();
-        return peer
+impl crate::CLI for Interface {
+    type Commands = crate::Commands;
+
+    fn constructor() -> Self::Commands {
+        return Self::Commands::parse()
     }
 }
 
 impl std::fmt::Display for Interface {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Interface(settings={})", self.configuration)
+        write!(f, "Interface(context={})", self.context)
     }
 }
