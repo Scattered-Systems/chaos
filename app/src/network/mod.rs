@@ -1,2 +1,5 @@
-pub mod behaviours;
-pub mod node;
+mod behaviours;
+mod node;
+
+pub use behaviours::*;
+pub use node::*;

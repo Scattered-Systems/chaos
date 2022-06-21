@@ -23,19 +23,15 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-mod app;
-mod core;
-mod controller;
-mod data;
-mod network;
+use disarray::{Node, Settings};
 
 #[tokio::main]
 async fn main() -> Result<(), disaronno::types::DynamicError> {
     // TODO - Create a standard, asynchronous configurator for network nodes
-    let settings = match core::settings::Settings::new() {
+    let settings = match Settings::new() {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
-    network::node::Node::new(settings.clone()).run().await?;
+    Node::new(settings.clone()).run().await?;
     Ok(())
 }

@@ -1,7 +1,4 @@
-use disaronno::{
-    networking::peers::Peer,
-    types::{DynamicError, NetworkAddress},
-};
+use acme::{NetworkAddress, Peer};
 use futures::StreamExt;
 use libp2p::{
     kad::{
@@ -18,10 +15,10 @@ use libp2p::{
 };
 use tokio::{io::{self, AsyncBufReadExt}};
 
-use crate::core::settings::Settings;
-use crate::network::behaviours::storage::StorageBehaviour;
+use crate::Settings;
+use crate::storage::StorageBehaviour;
 
-// TODO - Refine the structure into a trait and/or proc_macro
+type DynamicError = Box<std::error::Error + Send + Sync + 'static>;
 
 #[derive(Clone)]
 pub struct Node {
