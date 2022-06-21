@@ -1,12 +1,7 @@
 /*
-    Create a set of standard models, schemas, and structures with minimal code by implementing
-    some of the utilities created.
-
+    Appellation: context
+    Context: module
+    Creator: FL03 <jo3mccain@icloud.com> (https://pzzld.eth.link/)
+    Description:
+        ... Summary ...
  */
-pub mod primitives;
-pub mod proofs;
-pub mod structures;
-
-pub use primitives::*;
-pub use proofs::*;
-pub use structures::*;
