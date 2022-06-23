@@ -15,5 +15,6 @@ COPY --from=builder /project/target/release/chaos /chaos
 ENV DEV_MODE=false \
     PORT=8888
 
-EXPOSE ${PORT}\tcp
+EXPOSE ${PORT}/tcp
+EXPOSE ${PORT}/udp
 ENTRYPOINT ["./chaos"]
