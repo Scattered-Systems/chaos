@@ -1,6 +1,6 @@
 [workspace]
-default-members = ["app"]
-members = ["app", "crates/*"]
+default-members = ["chaos"]
+members = ["chaos"]
 
 [profile.dev]
 opt-level = 0

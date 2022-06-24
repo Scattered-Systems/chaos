@@ -1,0 +1,37 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
+description = "A lightweight IPFS client designed for an optimized, end-user experience"
+edition = "2021"
+keywords = ["blockchain", "cloud-storage", "decentralized", "scsys"]
+license = "MIT"
+name = "chaos"
+readme = "README.md"
+repository = "https://github.com/scattered-systems/chaos.git"
+version = "0.1.4" # TODO - Update crate version
+
+[[bin]]
+bench = false
+name = "chaos"
+path = "src/main.rs"
+test = false
+
+[dependencies]
+clap = { features = ["derive"], version = "3.2.5" }
+
+[dependencies.acme]
+features = ["full"]
+optional = false
+version = "0.1.25"
+
+[dependencies.disarray]
+features = ["full"]
+git = "https://github.com/scattered-systems/disarray"
+optional = true
+version = "0.1.4"
+
+[net]
+git-fetch-with-cli = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
