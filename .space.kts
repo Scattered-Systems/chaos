@@ -1,7 +1,6 @@
 job("Docker: Build and Push") {
     startOn {
         gitPush {
-            enabled: true,
             branchFilters {
                 +"refs/head/master"
             }
@@ -12,11 +11,11 @@ job("Docker: Build and Push") {
         build {
             context = "."
             file = "./Dockerfile"
-            args["HTTP_PROXY"] = "http://0.0.0.0:8888"
+            args["HTTP_PROXY"] = "http://0.0.0.0:9999"
             labels["vendor"] = "scattered-systems"
         }
 
-        push("scattered-systems.registry.jetbrains.space/p/chaos/containers/chaos") {
+        push("scattered-systems.registry.jetbrains.space/p/scsys/containers/chaos") {
             tags("0.0.\$JB_SPACE_EXECUTION_NUMBER", "latest")
         }
     }
