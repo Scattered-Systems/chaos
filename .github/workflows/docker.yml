@@ -2,9 +2,9 @@ name: Docker
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "latest", "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "latest" ]
 
 jobs:
   docker:

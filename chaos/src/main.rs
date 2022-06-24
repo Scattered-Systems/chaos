@@ -23,10 +23,9 @@
             * PUT <key>
             * PUT_PROVIDER <key>
  */
-use disarray::{Configuration, Context, CLI};
-
 use acme::Peer;
 use clap::Parser;
+use disarray::{CLI, Configuration, Context};
 
 #[derive(Clone, Debug, Parser)]
 pub struct Commands {

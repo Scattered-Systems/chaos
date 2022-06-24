@@ -1,10 +1,6 @@
 version: 2
 updates:
   - package-ecosystem: cargo
-    directory: "app"
-    schedule:
-      interval: daily
-  - package-ecosystem: cargo
-    directory: "crates/core"
+    directory: /chaos
     schedule:
       interval: daily
