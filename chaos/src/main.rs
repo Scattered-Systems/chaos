@@ -8,7 +8,7 @@
         blockchain optimized for the end-user experience without making traditional sacrifices in
         terms of security.
  */
-pub(crate) use crate::{
+pub use crate::{
     application::*,
     commands::*,
     configuration::Configuration,
@@ -19,11 +19,11 @@ mod commands;
 mod configuration;
 
 fn main() {
-    // TODO - Create a standard, asynchronous configurator for network nodes
     let settings = match Configuration::new() {
         Ok(value) => value,
         Err(err) => panic!("ConfigurationError: {:#?}", err)
     };
+    println!("{:#?}", settings);
     let interface = App::new(settings.clone());
     let args = interface.client();
     println!("{:#?}", args);

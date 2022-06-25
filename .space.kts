@@ -1,8 +1,8 @@
-job("Docker: Build and Push") {
+job("Docker: Build and Push Chaos") {
     startOn {
         gitPush {
-            branchFilters {
-                +"refs/head/master"
+            branchFilter {
+                +"refs/heads/master"
             }
         }
     }
@@ -10,8 +10,8 @@ job("Docker: Build and Push") {
     docker {
         build {
             context = "."
-            file = "./Dockerfile"
-            args["HTTP_PROXY"] = "http://0.0.0.0:9999"
+            customPlatform = "linux/arm"
+            file ="./Dockerfile"
             labels["vendor"] = "scattered-systems"
         }
 
@@ -20,4 +20,3 @@ job("Docker: Build and Push") {
         }
     }
 }
-
