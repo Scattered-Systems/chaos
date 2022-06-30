@@ -2,14 +2,17 @@ version: "3.9"
 services:
   application:
     build:
-      context: ../apps/chaos
+      context: ..
       dockerfile: Dockerfile
     container_name: chaos
+    depends_on:
+      - cache
+      - database
     ports:
-      - "9999:9999"
+      - "9099:9099"
     restart: always
     volumes:
-      - /data/chaos:/data
+      - /data/app:/data
 
   cache:
     container_name: cache
@@ -18,33 +21,17 @@ services:
       - "6379:6379"
     restart: always
 
-  cluster-master:
-    container_name: cluster-master
-    image: ipfs/ipfs-cluster
-    depends_on:
-      - ipfs-master
+  database:
+    container_name: database
     environment:
-      CLUSTER_PEERNAME: cluster
-      CLUSTER_SECRET: ${CLUSTER_SECRET}
-      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs0/tcp/5001
-      CLUSTER_CRDT_TRUSTEDPEERS: '*'
-      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094
-      CLUSTER_MONITORPINGINTERVAL: 2s
+      - POSTGRES_DB=db
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+    image: postgres
     ports:
-      - "9094:9094"
-      - "9096:9096"
+      - "5432:5432"
     volumes:
-      - /data/cluster/0:/data/ipfs-cluster
-
-  ipfs-master:
-    container_name: ipfs-master
-    image: ipfs/go-ipfs
-    ports:
-      - "4001:4001"
-      - "5001:5001"
-      - "8080:8080"
-    volumes:
-      - /data/ipfs/peers/0:/data/ipfs
+      - /data/database:/var/lib/postgresql/data
 
 volumes:
   data:
