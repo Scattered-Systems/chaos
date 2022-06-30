@@ -1,20 +1,22 @@
 FROM jo3mccain/rusty as builder
 
-RUN rustup default stable
-
 ADD . /project
 WORKDIR /project
 
 COPY . .
-RUN cargo build --release -p disarray --bin chaos
+RUN cargo build --release --workspace --quiet --color always
 
 FROM debian:buster-slim as application
 
-COPY --from=builder /project/target/release/chaos /chaos
 
-ENV DEV_MODE=false \
-    PORT=8888
+
+ENV CARGO_PKG_NAME = chaos \
+    DEV_MODE=false \
+    CLUSTER_PORT=9099
+
+COPY --from=builder /project/target/release/$CARGO_PKG_NAME /$CARGO_PKG_NAME
 
 EXPOSE ${PORT}/tcp
 EXPOSE ${PORT}/udp
-ENTRYPOINT ["./chaos"]
+
+ENTRYPOINT ["./$CARGO_PKG_NAME"]

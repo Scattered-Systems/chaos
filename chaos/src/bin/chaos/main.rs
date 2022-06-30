@@ -8,23 +8,20 @@
         blockchain optimized for the end-user experience without making traditional sacrifices in
         terms of security.
  */
+use chaos_sdk::CommandLineInterface;
 pub use crate::{
-    application::*,
-    commands::*,
-    configuration::Configuration,
+    core::*,
+    interface::*,
 };
 
-mod application;
-mod commands;
-mod configuration;
+mod api;
+mod core;
+mod interface;
 
 fn main() {
-    let settings = match Configuration::new() {
-        Ok(value) => value,
-        Err(err) => panic!("ConfigurationError: {:#?}", err)
-    };
-    println!("{:#?}", settings);
-    let interface = App::new(settings.clone());
-    let args = interface.client();
-    println!("{:#?}", args);
+    let settings = Settings::new().ok().unwrap();
+    let interface = App::new(settings.application.name);
+
+    println!("{:#?}", &settings);
+    println!("{:#?}", &interface.client());
 }

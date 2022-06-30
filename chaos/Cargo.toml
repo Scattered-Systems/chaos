@@ -1,35 +1,28 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems <jo3mccain@scattered-systems.com>"]
+categories = []
 description = "A lightweight IPFS client designed for an optimized, end-user experience"
 edition = "2021"
 keywords = ["blockchain", "cloud-storage", "decentralized", "scsys"]
 license = "MIT"
-name = "chaos"
+name = "chaos-sdk"
+publish = true
 readme = "README.md"
 repository = "https://github.com/scattered-systems/chaos.git"
-version = "0.1.5" # TODO - Update crate version
+version = "0.1.6" # TODO - Update crate version
 
 [features]
-core = ["disarray"]
-default = ["core"]
+default = []
 
 [[bin]]
-bench = false
 name = "chaos"
-path = "src/main.rs"
-test = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+test = true
 
 [dependencies]
 clap = { features = ["derive"], version = "3.2.5" }
 config = "0.13.1"
 glob = "0.3.0"
 serde = { features = ["derive"], version = "1.0.137" }
-
-[dependencies.acme]
-features = ["full"]
-optional = false
-version = ">=0.1.25"
-
-[dependencies.disarray]
-optional = true
-version = ">=0.1.3"

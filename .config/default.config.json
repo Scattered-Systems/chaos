@@ -1,5 +1,9 @@
 {
-  "peer": {
-    "port": 9999
+  "application": {
+    "context": "development",
+    "name": "chaos"
+  },
+  "logger": {
+    "level": "debug"
   }
 }
