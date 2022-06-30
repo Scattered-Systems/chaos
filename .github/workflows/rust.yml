@@ -12,22 +12,22 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  authenticate:
+  login:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Login
-        run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }} --verbose --color $CARGO_TERM_COLOR
+        run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Test
-        run: cargo test --workspace --verbose --color $CARGO_TERM_COLOR
+        run: cargo test --workspace
   crate:
     env:
       CARGO_PKG_NAME: chaos-sdk
-    needs: [ "authenticate", "test" ]
+    needs: [ "login", "test" ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
