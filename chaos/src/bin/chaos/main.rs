@@ -20,8 +20,8 @@ mod interface;
 
 fn main() {
     let settings = Settings::new().ok().unwrap();
-    let interface = App::new(settings.application.name);
+    let interface = App::new(settings.application.name.clone());
 
-    println!("{:#?}", &settings);
+    println!("{:#?}", settings.clone());
     println!("{:#?}", &interface.client());
 }
