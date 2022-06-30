@@ -1,0 +1,35 @@
+name: Rust
+
+on:
+  push:
+    branches: [ "master" ]
+    tags: [ "latest" ]
+  pull_request:
+    branches: [ "master" ]
+    tags: [ "latest" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login
+        run: cargo login ${{ secrets.CARGO_REGISTRY_TOKEN }} --verbose --color $CARGO_TERM_COLOR
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test
+        run: cargo test --workspace --verbose --color $CARGO_TERM_COLOR
+  crate:
+    env:
+      CARGO_PKG_NAME: chaos-sdk
+    needs: [ "authenticate", "test" ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and Push
+        run: cargo publish --package $CARGO_PKG_NAME --all-features --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
