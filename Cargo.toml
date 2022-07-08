@@ -1,6 +1,11 @@
 [workspace]
-default-members = ["chaos"]
-members = ["chaos"]
+default-members = [
+    "bin/chaos"
+]
+
+members = [
+    "bin/chaos"
+]
 
 [profile.dev]
 opt-level = 0
@@ -15,7 +20,7 @@ codegen-units = 256
 rpath = false
 
 [profile.release]
-opt-level = 3
+opt-level = "s"
 debug = false
 split-debuginfo = '...'  # Platform-specific.
 debug-assertions = false

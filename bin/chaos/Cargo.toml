@@ -1,0 +1,22 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
+categories = []
+description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
+edition = "2021"
+homepage = "https://github.com/scattered-systems/chaos"
+keywords = []
+name = "chaos"
+readme = "README.md"
+repository = "https://github.com/scattered-systems/chaos"
+version = "0.1.0"
+
+[[bin]]
+bench = false
+name = "chaos"
+
+[dependencies]
+
+[dev-dependencies]
+
+[build-dependencies]
+

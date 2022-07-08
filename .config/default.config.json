@@ -1,9 +1,0 @@
-{
-  "application": {
-    "context": "development",
-    "name": "chaos"
-  },
-  "logger": {
-    "level": "debug"
-  }
-}
