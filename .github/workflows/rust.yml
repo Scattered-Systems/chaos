@@ -2,14 +2,13 @@ name: Rust
 
 on:
   push:
-    branches: [ "master" ]
-    tags: [ "latest" ]
+    branches:
+      - master
+    tags:
+      - latest
   pull_request:
-    branches: [ "master" ]
-    tags: [ "latest" ]
-
-env:
-  CARGO_TERM_COLOR: always
+    branches:
+      - master
 
 jobs:
   login:
@@ -23,13 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Test
-        run: cargo test --workspace
-  crate:
-    env:
-      CARGO_PKG_NAME: chaos-sdk
-    needs: [ "login", "test" ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build and Push
-        run: cargo publish --package $CARGO_PKG_NAME --all-features --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo test --all-features --verbose --color always

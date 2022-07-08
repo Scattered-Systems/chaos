@@ -1,6 +1,14 @@
 version: 2
 updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
   - package-ecosystem: cargo
-    directory: /chaos
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: cargo
+    directory: /bin/chaos
     schedule:
       interval: daily
