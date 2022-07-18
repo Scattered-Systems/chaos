@@ -1,9 +1,9 @@
 FROM jo3mccain/rusty as builder
 
-ADD . /app
+ADD bin/chaos /app
 WORKDIR /app
 
-COPY . .
+COPY bin/chaos .
 RUN cargo build --release --verbose --color always
 
 FROM debian:buster-slim as application

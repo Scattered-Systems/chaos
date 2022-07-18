@@ -1,32 +1,22 @@
-[workspace]
-default-members = [
-    "bin/chaos"
-]
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
+categories = []
+description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
+edition = "2021"
+homepage = "https://scattered-systems.github.io/chaos/"
+keywords = []
+name = "chaos"
+readme = "README.md"
+repository = "https://github.com/scattered-systems/chaos"
+version = "0.1.0"
 
-members = [
-    "bin/chaos"
-]
+[[bin]]
+bench = false
+name = "chaos"
 
-[profile.dev]
-opt-level = 0
-debug = true
-split-debuginfo = '...'  # Platform-specific.
-debug-assertions = true
-overflow-checks = true
-lto = false
-panic = 'unwind'
-incremental = true
-codegen-units = 256
-rpath = false
+[dependencies]
 
-[profile.release]
-opt-level = "s"
-debug = false
-split-debuginfo = '...'  # Platform-specific.
-debug-assertions = false
-overflow-checks = false
-lto = false
-panic = 'unwind'
-incremental = false
-codegen-units = 16
-rpath = false
+[dev-dependencies]
+
+[build-dependencies]
+
