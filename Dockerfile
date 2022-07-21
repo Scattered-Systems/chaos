@@ -1,13 +1,17 @@
 FROM jo3mccain/rusty as builder
 
-ADD bin/chaos /app
+ADD . /app
 WORKDIR /app
 
-COPY bin/chaos .
+COPY . .
 RUN cargo build --release --verbose --color always
 
-FROM debian:buster-slim as application
+FROM photon as application
 
-COPY --from=builder /app/target/release/aether /aether
+ENV PORT=9001
 
-ENTRYPOINT ["./aether"]
+COPY --from=builder /app/target/release/chaos /chaos
+
+EXPOSE ${PORT}/tcp
+EXPOSE ${PORT}/udp
+ENTRYPOINT ["./chaos"]
