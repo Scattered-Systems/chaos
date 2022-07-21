@@ -8,7 +8,3 @@ updates:
     directory: /
     schedule:
       interval: daily
-  - package-ecosystem: cargo
-    directory: /bin/chaos
-    schedule:
-      interval: daily
