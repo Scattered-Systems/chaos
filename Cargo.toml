@@ -9,7 +9,7 @@ license = "MIT"
 name = "chaos-sdk"
 readme = "README.md"
 repository = "https://github.com/scattered-systems/chaos"
-version = "0.1.0"
+version = "0.1.7"
 
 [[bin]]
 bench = false
