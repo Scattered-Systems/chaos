@@ -7,7 +7,7 @@ currently being supported with security updates.
 
 | Package      | Current | Supported |
 |--------------|---------|-----------|
-| chaos        | 0.1.0   | <=0.1.0   |
+| chaos-sdk    | 0.1.7   | <=0.1.6   |
 
 
 ## Reporting a Vulnerability
