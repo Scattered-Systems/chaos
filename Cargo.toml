@@ -1,31 +1,35 @@
-[package]
-authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
-categories = []
-description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
-edition = "2021"
-homepage = "https://scattered-systems.github.io/chaos/"
-keywords = []
-license = "MIT"
-name = "chaos-sdk"
-readme = "README.md"
-repository = "https://github.com/scattered-systems/chaos"
-version = "0.1.7"
+[workspace]
+default-members = [
+    "bin/app",
+    "lib/sdk"
+]
 
-[[bin]]
-bench = false
-name = "chaos"
+members = [
+    "bin/app",
+    "bin/rpc",
+    "lib/sdk"
+]
 
-[features]
-default = []
-full = []
+[profile.dev]
+codegen-units = 256
+debug = true
+debug-assertions = true
+incremental = true
+lto = false
+panic = 'unwind'
+rpath = false
+opt-level = 0
+overflow-checks = true
+split-debuginfo = 'packed' # Platform specific
 
-[lib]
-crate-type = ["cdylib", "rlib"]
-test = true
-
-[build-dependencies]
-
-[dependencies]
-scsys = { features = ["full"], version = ">=0.1.4" }
-
-[dev-dependencies]
+[profile.release]
+codegen-units = 16
+debug = false
+debug-assertions = false
+incremental = false
+lto = false
+panic = 'unwind'
+rpath = false
+opt-level = 'z'
+overflow-checks = false
+split-debuginfo = 'off' # Platform specific

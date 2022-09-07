@@ -3,14 +3,14 @@ name: Rust
 on:
   push:
     branches:
-      - master
+      - prod
     tags:
-      - latest
+      - v*.*.*
   pull_request:
     branches:
-      - master
+      - prod
     tags:
-      - latest
+      - v*.*.*
 
 jobs:
   crate:

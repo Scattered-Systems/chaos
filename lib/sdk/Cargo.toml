@@ -1,0 +1,43 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
+categories = []
+description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
+edition = "2021"
+homepage = "https://scattered-systems.github.io/chaos/"
+keywords = []
+license = "MIT"
+name = "chaos-sdk"
+readme = "https://github.com/scattered-systems/chaos/#README.md"
+repository = "https://github.com/scattered-systems/chaos"
+version = "0.1.7"
+
+[features]
+default = ["core"]
+full = ["core"]
+
+core = ["providers"]
+
+providers = [
+    "ethereum",
+    "ipfs"
+]
+
+ethereum = ["ethers"]
+ipfs = ["ipfs/default"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+test = true
+
+[dependencies]
+ethers = { optional = true, version = "0.17.0"}
+ipfs = { git = "https://github.com/rs-ipfs/rust-ipfs", optional = true }
+tokio = { features = ["full"], version = "1.21.0" }
+
+[dependencies.scsys]
+git = "https://github.com/scattered-systems/scsys"
+features = ["full"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustc-args = ["--cfg", "docsrs"]

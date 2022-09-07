@@ -1,0 +1,40 @@
+[package]
+authors = ["FL03 <jo3mccain@icloud.com> (https://gitlab.com)", "Scattered-Systems (https://github.com/scattered-systems)"]
+categories = []
+description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
+edition = "2021"
+homepage = "https://scattered-systems.github.io/chaos/"
+keywords = []
+license = "MIT"
+name = "chaos-rpc"
+readme = "https://github.com/scattered-systems/chaos/#README.md"
+repository = "https://github.com/scattered-systems/chaos"
+version = "0.1.0"
+
+[dependencies]
+axum = { features = ["headers"], version = "0.5.15" }
+bcrypt = "0.13.0"
+futures = "0.3.23"
+glob = "0.3.0"
+http = "0.2.8"
+hyper = { features = ["full"], version = "0.14.20" }
+jsonwebkey = "0.3.5"
+openidconnect = "2.3.2"
+rand = "0.8.5"
+redis = "0.21.6"
+reqwest = "0.11.11"
+serde = { features = ["derive"], version = "1.0.144" }
+serde_json = "1.0.85"
+tokio = { features = ["full"], version = "1.21.0" }
+tower = "0.4.13"
+tower-http = { features = ["compression-br", "propagate-header", "sensitive-headers", "trace"], version = "0.3.4" }
+tracing = "0.1.36"
+tracing-subscriber = "0.3.15"
+
+[dependencies.scsys]
+features = ["full"]
+version = "0.1.15"
+
+[dependencies.chaos-sdk]
+features = ["full"]
+path = "../../lib/sdk"
