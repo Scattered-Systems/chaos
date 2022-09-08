@@ -1,14 +1,14 @@
 [package]
-authors = ["FL03 <jo3mccain@icloud.com> (https://gitlab.com/FL03)"]
+authors = ["FL03 <jo3mccain@icloud.com> (https://gitlab.com/FL03)", "Scattered-Systems (https://github.com/scattered-systems)"]
 categories = []
 description = "Chaos is a complete cloud storage solution specializing in decentralized service providers"
 edition = "2021"
-homepage = "https://gitlab.com/FL03/template-restful-rust/-/wikis/home"
+homepage = "https://scattered-systems.github.io/chaos"
 keywords = ["application", "restful"]
 license = "MIT"
 name = "chaos-api"
-readme = "https://gitlab.com/FL03/template-restful-rust/#README"
-repository = "https://gitlab.com/template-restful-rust"
+readme = "https://github.com/scattered-systems/chaos/#README"
+repository = "https://github.com/scattered-systems/chaos"
 version = "0.1.0"
 
 [build-dependencies]
