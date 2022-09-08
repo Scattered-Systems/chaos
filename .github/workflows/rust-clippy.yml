@@ -2,13 +2,9 @@ name: Code Analysis
 
 on:
   push:
-    branches:
-      - prod
     tags:
       - v*.*.*
   pull_request:
-    branches:
-      - prod
     tags:
       - v*.*.*
 
