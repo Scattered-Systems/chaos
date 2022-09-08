@@ -1,20 +1,5 @@
 version: "3.9"
 services:
-  api:
-    build:
-      context: ..
-      dockerfile: Dockerfile
-      target: api
-    container_name: chaos-api
-    depends_on:
-      - cache
-      - database
-    ports:
-      - "8080:8080"
-    volumes:
-      - /config/:../.config
-      - /data:/data
-
   cache:
     container_name: redis
     image: redis

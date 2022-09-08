@@ -1,12 +1,12 @@
 [workspace]
 default-members = [
-    "bin/app",
+    "bin/cli",
     "lib/sdk"
 ]
 
 members = [
-    "bin/app",
-    "bin/rpc",
+    "bin/api",
+    "bin/cli",
     "lib/sdk"
 ]
 
