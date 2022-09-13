@@ -11,7 +11,7 @@ use scsys::Timestamp;
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Application {
-    pub timestamp: Timestamp
+    pub timestamp: Timestamp,
 }
 
 impl Application {

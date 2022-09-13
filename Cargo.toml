@@ -1,11 +1,12 @@
 [workspace]
 default-members = [
-    "bin/cli",
+    "bin/chaos",
     "lib/sdk"
 ]
 
 members = [
     "bin/api",
+    "bin/chaos",
     "bin/cli",
     "lib/sdk"
 ]

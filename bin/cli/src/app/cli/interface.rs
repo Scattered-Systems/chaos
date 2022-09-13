@@ -14,7 +14,7 @@ pub struct Cli {
     #[clap(arg_enum)]
     pub args: Option<AppArgs>,
     #[clap(subcommand)]
-    pub command: Option<Commands>
+    pub command: Option<Commands>,
 }
 
 impl Cli {
@@ -30,25 +30,44 @@ impl Default for Cli {
     }
 }
 
-#[derive(Clone, Debug, Hash, EnumString, EnumVariantNames, PartialEq, clap::ArgEnum, serde::Deserialize, serde::Serialize)]
+#[derive(
+    Clone,
+    Debug,
+    Hash,
+    EnumString,
+    EnumVariantNames,
+    PartialEq,
+    clap::ArgEnum,
+    serde::Deserialize,
+    serde::Serialize,
+)]
 pub enum AppArgs {
     Account,
     Update,
-    
 }
 
-#[derive(Clone, Debug, Hash, EnumString, EnumVariantNames, PartialEq, clap::Subcommand, serde::Deserialize, serde::Serialize)]
+#[derive(
+    Clone,
+    Debug,
+    Hash,
+    EnumString,
+    EnumVariantNames,
+    PartialEq,
+    clap::Subcommand,
+    serde::Deserialize,
+    serde::Serialize,
+)]
 #[strum(serialize_all = "snake_case")]
 pub enum Commands {
     Ipfs {
         #[clap(long, value_parser)]
-        cid: String
+        cid: String,
     },
     Storj {
         #[clap(long, short, value_parser)]
         bucket: Option<String>,
     },
-    Null
+    Null,
 }
 
 impl Default for Commands {

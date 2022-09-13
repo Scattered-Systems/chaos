@@ -1,0 +1,11 @@
+[application]
+mode = "development"
+name = "Chaos"
+
+[logger]
+level = "debug"
+
+[server]
+host = "0.0.0.0"
+port = 8999
+

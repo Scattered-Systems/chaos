@@ -12,16 +12,10 @@ repository = "https://github.com/scattered-systems/chaos"
 version = "0.1.7"
 
 [features]
-default = ["core", "ipfs"]
-full = ["core", "providers"]
+default = ["core", "ipfs", "storj"]
+full = ["core", "arweave", "ipfs", "storj"]
 
 core = []
-
-providers = [
-    "arweave",
-    "ipfs",
-    "storj"
-]
 
 arweave = ["arloader"]
 ipfs = ["ipfs/default"]

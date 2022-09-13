@@ -1,8 +1,7 @@
-# Exceptions
-
-!**/default.config.*
-
-**/!*.env.example
+# Config
+**/.config/*.config.*
+**/*.env
+**/*.env.*
 
 # Dirs
 **/__pycache__/
@@ -20,15 +19,13 @@
 **/dist/
 **/env/
 **/node_modules/
+**/screenshots/
 **/target/
 **/venv/
 
-# Extensions
+# File Extensions
 **/*.bk
 **/*.bk.*
-
-**/config.*
-**/*.config.*
 
 **/*.csv
 **/*.csv.*
@@ -38,15 +35,6 @@
 
 **/*.db-*.*
 
-**/*.env
-**/*.env.*
-
-**/*.jpeg
-**/*.jpeg.*
-
-**/*.jpg
-**/*.jpg.*
-
 **/*.lock
 **/*.lock.*
 
@@ -55,14 +43,15 @@
 **/*.log
 **/*.log.*
 
-**/*.png
-**/*.png.*
-
-**/*.svg
-**/*.svg.*
-
 **/*.whl
 **/*.whl.*
 
 **/*.zip
 **/*.zip.*
+
+# Exceptions
+!**/.artifacts/assets/
+!**/.config/default.config.*
+!**/*.env.example
+!**/*.config.cjs
+!**/*.config.js

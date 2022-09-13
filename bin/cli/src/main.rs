@@ -13,7 +13,6 @@ async fn main() -> scsys::BoxResult {
     let app = app::Application::new();
 
     app.run().await.expect("Application Error");
-    
+
     Ok(())
 }
-
