@@ -27,8 +27,8 @@ impl std::fmt::Display for Application {
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Settings {
     pub application: Application,
-    pub cache: Cache,
-    pub database: Database,
+    pub cache: Option<Cache>,
+    pub database: Option<Database>,
     pub logger: Logger,
     pub server: Server,
 }
