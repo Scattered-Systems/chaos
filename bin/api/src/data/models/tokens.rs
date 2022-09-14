@@ -12,4 +12,26 @@ pub struct TokenModel {
     username: Option<String>,
 }
 
-impl TokenModel {}
+impl TokenModel {
+    pub fn new(username: Option<String>) -> Self {
+        Self { access_token: String::new(), token_type: String::new(), username }
+    }
+
+}
+
+impl Default for TokenModel {
+    fn default() -> Self {
+        Self::new(None)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::TokenModel;
+
+    #[test]
+    fn test_default_token() {
+        let a = TokenModel::default();
+        assert_eq!(a.username, None)
+    }
+}

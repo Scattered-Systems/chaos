@@ -4,20 +4,22 @@
     Description:
         ... Summary ...
 */
-use axum::{extract::Path, routing::get, Json, Router};
+use crate::models::TokenModel;
+use axum::{extract::Path, routing::{get, post}, Json, Router};
 use scsys::Timestamp;
 use serde_json::json;
 
-#[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
-pub struct Homepage(pub String);
+#[derive(Clone, Debug)]
+pub struct Homepage;
 
 impl Homepage {
-    pub fn new(data: String) -> Self {
-        Self(data)
+    pub fn new() -> Self {
+        Self
     }
-    pub fn router(&mut self) -> Router {
+    pub fn router(&self) -> Router {
         let mut router = Router::new();
         router = router.route("/", get(landing));
+        router = router.route("/token", post(create_token));
         router = router.route("/notifications/:id", get(notifications));
         router.clone()
     }
@@ -25,7 +27,7 @@ impl Homepage {
 
 impl Default for Homepage {
     fn default() -> Self {
-        Self::new("/".to_string())
+        Self::new()
     }
 }
 
@@ -33,6 +35,10 @@ impl Default for Homepage {
 pub async fn landing() -> crate::AxumJson {
     let data = json!({ "timestamp": Timestamp::default() });
     Json(data)
+}
+
+pub async fn create_token(username: Option<String>) -> crate::AxumJson {
+    Json(json!(TokenModel::new(username)))
 }
 
 /// Implements a notification endpoint

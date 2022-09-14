@@ -8,19 +8,9 @@ use axum::http::{header, HeaderMap, HeaderValue, StatusCode};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use tower_cookies::{Cookie, Cookies};
 
-#[derive(Deserialize)]
-struct ValuedMessage<T> {
-    #[serde(rename = "_")]
-    value: T,
-}
-
-#[derive(Serialize)]
-struct ValuedMessageRef<'a, T> {
-    #[serde(rename = "_")]
-    value: &'a T,
-}
-
 const FLASH_COOKIE_NAME: &str = "_flash";
+
+pub type PostResponse = (StatusCode, HeaderMap);
 
 pub fn get_flash_cookie<T>(cookies: &Cookies) -> Option<T>
 where
@@ -35,7 +25,6 @@ where
     })
 }
 
-pub type PostResponse = (StatusCode, HeaderMap);
 
 pub fn post_response<T>(cookies: &mut Cookies, data: T) -> PostResponse
 where
@@ -56,13 +45,14 @@ where
     (StatusCode::SEE_OTHER, header)
 }
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test() {
-        let f = |x: usize, y: usize| x + y;
-        let actual = f(4, 4);
-        let expected: usize = 8;
-        assert_eq!(actual, expected)
-    }
+#[derive(Deserialize)]
+struct ValuedMessage<T> {
+    #[serde(rename = "_")]
+    value: T,
+}
+
+#[derive(Serialize)]
+struct ValuedMessageRef<'a, T> {
+    #[serde(rename = "_")]
+    value: &'a T,
 }

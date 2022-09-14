@@ -29,7 +29,7 @@ impl Api {
     }
     pub async fn client(&self) -> scsys::BoxResult<axum::Router> {
         let client = axum::Router::new()
-            .merge(endpoints::Homepage::default().router())
+            .merge(endpoints::Homepage::new().router())
             .merge(endpoints::CrudRouter::default().router())
             .merge(endpoints::StorjRouter::new().router())
             .layer(
