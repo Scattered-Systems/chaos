@@ -4,10 +4,11 @@
     Description:
         ... Summary ...
 */
-pub use self::{crud::CrudRouter, index::Homepage};
+pub use self::{crud::CrudRouter, index::Homepage, storj::StorjRouter};
 
 mod crud;
 mod index;
+mod storj;
 
 pub trait PageRouter {
     fn path(&self) -> String;

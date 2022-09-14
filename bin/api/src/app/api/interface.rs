@@ -31,6 +31,7 @@ impl Api {
         let client = axum::Router::new()
             .merge(endpoints::Homepage::default().router())
             .merge(endpoints::CrudRouter::default().router())
+            .merge(endpoints::StorjRouter::default().router())
             .layer(
                 TraceLayer::new_for_http()
                     .make_span_with(DefaultMakeSpan::new().include_headers(true))
