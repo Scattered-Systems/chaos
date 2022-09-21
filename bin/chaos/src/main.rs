@@ -9,11 +9,11 @@ async fn main() -> scsys::BoxResult {
     println!("Welcome to the Chaos!");
 
     let chaos = Chaos::new();
-    let _storj = chaos.context.settings.provider.expect("").clone();
+    let _agent = chaos_sdk::storj::StorjActor::from(&chaos.context.settings.provider.expect(""));
 
-    println!("{:?}", _storj.clone());
+    println!("{:?}", _agent.bucket_names());
     let _exchange = clients::Exchange::new();
-    println!("{:?}", _exchange.currencies().await);
+    // println!("{:?}", _exchange.currencies().await);
 
     Ok(())
 }

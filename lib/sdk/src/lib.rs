@@ -6,14 +6,19 @@
 */
 #[doc(inline)]
 #[cfg(feature = "core")]
-pub use self::{actors::*, cont::*, core::*, data::*};
+pub use self::{actors::*, components::*, core::*, data::*};
 
 mod actors;
-mod cont;
+mod components;
 mod core;
 mod data;
 
 pub mod prelude {
+    #[cfg(feature = "arweave")]
+    pub use arloader;
     #[cfg(feature = "ipfs")]
     pub use ipfs;
+    #[cfg(feature = "storj")]
+    pub use uplink;
+
 }

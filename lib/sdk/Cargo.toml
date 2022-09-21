@@ -28,15 +28,12 @@ test = true
 [dependencies]
 arloader = { optional = true, version = "0.1.63" }
 ipfs = { git = "https://github.com/rs-ipfs/rust-ipfs", optional = true }
+scsys = { features = ["full"], git = "https://github.com/scattered-systems/scsys" }
 serde = { features = ["derive"], version = "1.0.144" }
 serde_json = "1.0.85"
 tokio = { features = ["full"], version = "1.21.0" }
 tokio-stream = "0.1.9"
 uplink = { optional = true, version = "0.3.0" }
-
-[dependencies.scsys]
-git = "https://github.com/scattered-systems/scsys"
-features = ["full"]
 
 [package.metadata.docs.rs]
 all-features = true

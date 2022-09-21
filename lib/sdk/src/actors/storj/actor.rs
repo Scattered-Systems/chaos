@@ -16,7 +16,7 @@ impl StorjActor {
     pub fn new(access: String, passphrase: String) -> Self {
         Self { access, passphrase }
     }
-    pub fn from_self(data: &Self) -> Self {
+    pub fn from(data: &Self) -> Self {
         Self::new(data.access.clone(), data.passphrase.clone())
     }
     pub fn from_env() -> Self {

@@ -25,14 +25,14 @@ impl std::fmt::Display for Application {
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub enum Provider {
-    Storj(Option<chaos_sdk::store::StorjActor>)
+    Storj(Option<chaos_sdk::storj::StorjActor>)
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Settings {
     pub application: Application,
     pub logger: Logger,
-    pub provider: Option<chaos_sdk::store::StorjActor>,
+    pub provider: Option<chaos_sdk::storj::StorjActor>,
     pub server: Server,
 }
 

@@ -4,8 +4,6 @@
     Description:
         ... Summary ...
 */
-pub use self::{arweave::*, ipfs::*, storj::*};
+pub use self::agent::IpfsAgent;
 
-mod arweave;
-mod ipfs;
-mod storj;
+mod agent;
