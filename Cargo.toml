@@ -5,9 +5,7 @@ default-members = [
 ]
 
 members = [
-    "bin/api",
     "bin/chaos",
-    "bin/cli",
     "lib/sdk"
 ]
 
@@ -21,7 +19,6 @@ panic = 'unwind'
 rpath = false
 opt-level = 0
 overflow-checks = true
-split-debuginfo = 'packed' # Platform specific
 
 [profile.release]
 codegen-units = 16
@@ -33,4 +30,3 @@ panic = 'unwind'
 rpath = false
 opt-level = 'z'
 overflow-checks = false
-split-debuginfo = 'off' # Platform specific
