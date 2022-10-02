@@ -20,5 +20,4 @@ pub mod prelude {
     pub use ipfs;
     #[cfg(feature = "storj")]
     pub use uplink;
-
 }

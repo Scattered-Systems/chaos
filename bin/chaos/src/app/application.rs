@@ -4,26 +4,43 @@
     Description:
         ... Summary ...
 */
-use crate::{Context, Settings};
+use crate::core::{Context, Settings};
+use super::api::Api;
+
+use scsys::BoxResult;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Hash, PartialEq, Serialize)]
 pub struct Chaos {
-    pub context: Context
+    pub context: Context,
 }
 
 impl Chaos {
     pub fn new(context: Context) -> Self {
         Self { context }
     }
-
-    pub fn get_context(&self) -> Context {
+    pub fn context(&self) -> Context {
         self.context.clone()
     }
-
     pub fn get_settings(&self) -> Settings {
         self.context.settings.clone()
     }
+    pub fn api(&self) -> Api {
+        Api::new(self.context())
+    }
+    pub fn with_logging(&self) -> &Self {
+        self.context.settings.logger.setup();
+        self
+    }
+    pub async fn run(&self) -> BoxResult<&Self> {
+        println!("{}", self.context.settings.server.clone());
+        match self.api().run().await {
+            Ok(_) => {},
+            Err(_) => panic!("{:?}", scsys::Error::Default)
+        };
+        Ok(self)
+    }
+
 }
 
 impl std::convert::From<Settings> for Chaos {

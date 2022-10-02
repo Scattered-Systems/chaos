@@ -9,7 +9,7 @@ use crate::{StorjBucket, StorjGrant, StorjProject};
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct StorjActor {
     access: String,
-    passphrase: String
+    passphrase: String,
 }
 
 impl StorjActor {
@@ -22,11 +22,11 @@ impl StorjActor {
     pub fn from_env() -> Self {
         let access = match std::env::var_os("STORJ_ACCESS_GRANT") {
             Some(v) => v.into_string().ok().unwrap(),
-            None => String::new()
+            None => String::new(),
         };
         let passphrase = match std::env::var_os("STORJ_PASSPHRASE") {
             Some(v) => v.into_string().ok().unwrap(),
-            None => String::new()
+            None => String::new(),
         };
         Self::new(access, passphrase)
     }
@@ -52,5 +52,3 @@ impl StorjActor {
             .collect::<Vec<String>>()
     }
 }
-
-
