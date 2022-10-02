@@ -56,28 +56,23 @@ jobs:
             --build-arg VERSION=${VERSION} \
             --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
             --build-arg VCS_REF=${GITHUB_SHA::8} \
-            ${TAGS} --file ./bin/chaos/Dockerfile ./bin/chaos
-      -
-        name: Set up Docker Buildx
+            ${TAGS} --file .
+      - name: Set up Docker Buildx
         uses: crazy-max/ghaction-docker-buildx@v3
-      -
-        name: Docker Buildx (build)
-        run: |
-          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
-      -
-        name: Login to DockerHub
+      - name: Docker Buildx (build)
+        run: docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
+      - name: Login to DockerHub
         if: success() && github.event_name != 'pull_request'
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Docker Buildx (push)
-        if: success() && github.event_name != 'pull_request'
+      - name: Docker Buildx (push)
+        if: success()
         run: |
           docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
       -
         name: Inspect image
-        if: always() && github.event_name != 'pull_request'
+        if: always()
         run: |
           docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}

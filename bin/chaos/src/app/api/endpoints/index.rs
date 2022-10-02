@@ -36,8 +36,9 @@ pub async fn landing() -> Json<Value> {
 }
 
 /// Implements the authorization url following the OAuth2 specification
-pub async fn authorization(Path(id): Path<usize>) -> Json<Value> {
-    let data = json!({ "id": id });
+pub async fn fetch_cid(Path(cid): Path<String>) -> Json<Value> {
+
+    let data = json!({ "cid": cid });
     Json(data)
 }
 

@@ -26,10 +26,8 @@ pub struct Api {
 
 impl Api {
     pub fn new(context: Context) -> Self {
-        Self {
-            address: context.clone().settings.server.address(),
-            context,
-        }
+        let address = context.settings.server.adderss();
+        Self { address, context }
     }
     pub async fn client(&self) -> BoxResult<axum::Router> {
         let client = axum::Router::new()
