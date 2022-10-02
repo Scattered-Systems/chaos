@@ -17,7 +17,6 @@ async fn main() -> scsys::BoxResult {
     println!("Welcome to the Chaos!");
 
     let chaos = app::Chaos::default();
-    let _res = sample_s3()?;
   
 
     Ok(())
