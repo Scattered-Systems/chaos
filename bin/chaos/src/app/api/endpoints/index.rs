@@ -5,6 +5,7 @@
         ... Summary ...
 */
 use axum::{extract::Path, routing::get, Json, Router};
+use chaos_sdk::ipfs::IpfsAgent;
 use scsys::Timestamp;
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -19,7 +20,7 @@ impl Homepage {
     pub fn router(&self) -> Router {
         Router::new()
             .route("/", get(landing))
-            .route("/auth/ipfs/", get(fetch_cid))
+            .route("/auth/ipfs/:cid", get(fetch_cid))
             .route("/auth/notifications/:id", get(notifications))
     }
 }
@@ -38,7 +39,9 @@ pub async fn landing() -> Json<Value> {
 
 /// Implements the authorization url following the OAuth2 specification
 pub async fn fetch_cid(Path(cid): Path<String>) -> Json<Value> {
-    let data = json!({ "cid": cid });
+    let agent = IpfsAgent::new(None);
+    let res = agent.stream_ipfs_path(None, cid.as_str()).await;
+    let data = json!({ "cid": cid, "data": res });
     Json(data)
 }
 
