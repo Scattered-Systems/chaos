@@ -29,10 +29,10 @@ test = true
 arloader = { optional = true, version = "0.1.63" }
 ipfs = { git = "https://github.com/rs-ipfs/rust-ipfs", optional = true }
 scsys = { features = ["full"], version = "0.1.17" }
-serde = { features = ["derive"], version = "1.0.144" }
+serde = { features = ["derive"], version = "1.0.145" }
 serde_json = "1.0.85"
-tokio = { features = ["full"], version = "1.21.0" }
-tokio-stream = "0.1.9"
+tokio = { features = ["full"], version = "1.21.2" }
+tokio-stream = "0.1.10"
 uplink = { optional = true, version = "0.3.0" }
 
 [package.metadata.docs.rs]

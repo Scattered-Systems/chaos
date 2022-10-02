@@ -7,7 +7,7 @@
 use axum::{extract::Path, routing::get, Json, Router};
 use scsys::Timestamp;
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::{json, Value};
 
 #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub struct Homepage(pub String);
@@ -19,7 +19,8 @@ impl Homepage {
     pub fn router(&self) -> Router {
         Router::new()
             .route("/", get(landing))
-            .route("/notifications/:id", get(notifications))
+            .route("/auth/ipfs/", get(fetch_cid))
+            .route("/auth/notifications/:id", get(notifications))
     }
 }
 
@@ -37,11 +38,9 @@ pub async fn landing() -> Json<Value> {
 
 /// Implements the authorization url following the OAuth2 specification
 pub async fn fetch_cid(Path(cid): Path<String>) -> Json<Value> {
-
     let data = json!({ "cid": cid });
     Json(data)
 }
-
 
 /// Implements the OAuth2 token
 pub async fn token(Path(id): Path<usize>) -> Json<Value> {
@@ -49,10 +48,8 @@ pub async fn token(Path(id): Path<usize>) -> Json<Value> {
     Json(data)
 }
 
-
 /// Implements a notification endpoint
 pub async fn notifications(Path(id): Path<usize>) -> Json<Value> {
     let data = json!({ "id": id });
     Json(data)
 }
-

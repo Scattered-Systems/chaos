@@ -8,5 +8,3 @@
 pub use self::interface::Api;
 pub mod endpoints;
 mod interface;
-
-

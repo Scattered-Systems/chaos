@@ -17,21 +17,21 @@ pub enum IpfsAgentMode {
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 pub struct IpfsAgent {
-    pub mode: IpfsAgentMode
+    pub mode: IpfsAgentMode,
 }
 
 impl IpfsAgent {
     pub fn new(mode: Option<IpfsAgentMode>) -> Self {
         let mode = match mode {
             Some(v) => v,
-            None => IpfsAgentMode::default()
+            None => IpfsAgentMode::default(),
         };
         Self { mode }
     }
     pub async fn ipfs(&self, options: Option<IpfsOptions>) -> Ipfs<Types> {
         let options = match options {
             Some(v) => v,
-            None => self.in_memory()
+            None => self.in_memory(),
         };
         let (ipfs, fut): (Ipfs<Types>, _) = UninitializedIpfs::new(options).start().await.unwrap();
         tokio::spawn(fut);

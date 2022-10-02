@@ -4,8 +4,8 @@
     Description:
         ... Summary ...
 */
-use serde::{Deserialize, Serialize};
 use super::Settings;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Hash, PartialEq, Serialize)]
 pub struct Context {

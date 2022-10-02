@@ -4,9 +4,9 @@
     Description:
         ... Summary ...
 */
-use crate::core::Context;
 use super::endpoints;
-
+use crate::core::Context;
+use axum::Router;
 use http::header::{HeaderName, AUTHORIZATION};
 use scsys::BoxResult;
 use serde::{Deserialize, Serialize};
@@ -26,11 +26,11 @@ pub struct Api {
 
 impl Api {
     pub fn new(context: Context) -> Self {
-        let address = context.settings.server.adderss();
+        let address = context.clone().settings.server.address();
         Self { address, context }
     }
-    pub async fn client(&self) -> BoxResult<axum::Router> {
-        let client = axum::Router::new()
+    pub async fn client(&self) -> BoxResult<Router> {
+        let client = Router::new()
             .merge(endpoints::Homepage::default().router())
             .layer(
                 TraceLayer::new_for_http()
@@ -56,7 +56,7 @@ impl Api {
         println!("signal shutdown");
     }
     /// Quickly run the api
-    pub async fn run(&self) -> scsys::BoxResult {
+    pub async fn run(&self) -> BoxResult {
         let client = self.client().await.expect("Client error...").clone();
         let server = axum::Server::bind(&self.address.clone())
             .serve(client.into_make_service())

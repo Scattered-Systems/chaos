@@ -4,8 +4,8 @@
     Description:
         ... Summary ...
 */
-use crate::core::{Context, Settings};
 use super::api::Api;
+use crate::core::{Context, Settings};
 
 use scsys::BoxResult;
 use serde::{Deserialize, Serialize};
@@ -35,12 +35,11 @@ impl Chaos {
     pub async fn run(&self) -> BoxResult<&Self> {
         println!("{}", self.context.settings.server.clone());
         match self.api().run().await {
-            Ok(_) => {},
-            Err(_) => panic!("{:?}", scsys::Error::Default)
+            Ok(_) => {}
+            Err(_) => panic!("{:?}", scsys::Error::Default),
         };
         Ok(self)
     }
-
 }
 
 impl std::convert::From<Settings> for Chaos {

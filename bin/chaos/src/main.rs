@@ -13,7 +13,11 @@ async fn main() -> scsys::BoxResult {
     println!("Welcome to the Chaos!");
 
     let chaos = app::Chaos::default();
-    chaos.with_logging().run().await.expect("App failed to start");
+    chaos
+        .with_logging()
+        .run()
+        .await
+        .expect("App failed to start");
 
     Ok(())
 }

@@ -5,8 +5,6 @@
         ... Summary ...
 */
 #[doc(inline)]
-pub use self::{primitives::*};
+pub use self::primitives::*;
 
 mod primitives;
-
-
