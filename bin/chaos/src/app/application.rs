@@ -32,6 +32,10 @@ impl Chaos {
         self.context.settings.logger.setup();
         self
     }
+    pub async fn spawn_rpc(&self) -> BoxResult<&Self> {
+        super::rpc::spawn_rpc().await.expect("Failed");
+        Ok(self)
+    }
     pub async fn run(&self) -> BoxResult<&Self> {
         println!("{}", self.context.settings.server.clone());
         match self.api().run().await {

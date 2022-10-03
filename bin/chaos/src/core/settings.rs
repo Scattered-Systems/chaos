@@ -25,15 +25,22 @@ impl std::fmt::Display for Application {
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
-pub enum Provider {
-    Storj(Option<chaos_sdk::storj::StorjActor>),
+pub struct S3 {
+    access_key: String,
+    secret_key: String,
+    endpoint: String
+}
+
+#[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct Providers {
+    pub s3: Option<S3>
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Settings {
     pub application: Application,
     pub logger: Logger,
-    pub provider: Option<chaos_sdk::storj::StorjActor>,
+    pub providers: Option<Providers>,
     pub server: Server,
 }
 

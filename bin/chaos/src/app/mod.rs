@@ -8,3 +8,4 @@ pub use self::application::Chaos;
 
 pub mod api;
 mod application;
+pub mod rpc;
