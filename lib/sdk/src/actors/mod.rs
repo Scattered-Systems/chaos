@@ -7,4 +7,3 @@
 
 pub mod gateways;
 pub mod ipfs;
-pub mod storj;
