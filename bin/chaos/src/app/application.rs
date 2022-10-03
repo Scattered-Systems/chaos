@@ -4,7 +4,6 @@
     Description:
         ... Summary ...
 */
-use super::api::Api;
 use crate::core::{Context, Settings};
 
 use scsys::BoxResult;
@@ -25,9 +24,6 @@ impl Chaos {
     pub fn get_settings(&self) -> Settings {
         self.context.settings.clone()
     }
-    pub fn api(&self) -> Api {
-        Api::new(self.context())
-    }
     pub fn with_logging(&self) -> &Self {
         self.context.settings.logger.setup();
         self
@@ -38,7 +34,7 @@ impl Chaos {
     }
     pub async fn run(&self) -> BoxResult<&Self> {
         println!("{}", self.context.settings.server.clone());
-        match self.api().run().await {
+        match self.spawn_rpc().run().await {
             Ok(_) => {}
             Err(_) => panic!("{:?}", scsys::Error::Default),
         };

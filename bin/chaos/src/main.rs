@@ -14,7 +14,6 @@ async fn main() -> scsys::BoxResult {
 
     let chaos = app::Chaos::default();
     chaos.with_logging();
-    chaos.spawn_rpc().await.expect("RPC Error");
     chaos.run().await.expect("App failed to start");
 
     Ok(())
