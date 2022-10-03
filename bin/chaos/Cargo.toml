@@ -14,12 +14,9 @@ version = "0.1.0"
 [build-dependencies]
 
 [dependencies]
-axum = { features = ["headers"], version = "0.5.16" }
 bcrypt = "0.13.0"
 futures = "0.3.24"
 http = "0.2.8"
-hyper = { features = ["full"], version = "0.14.20" }
-jsonwebkey = "0.3.5"
 rust-s3 = "0.32.3"
 scsys = { features = ["full"], version = "0.1.17"}
 serde = { default-features = false, features = ["derive"], version = "1.0.145" }

@@ -10,8 +10,7 @@ mod context;
 mod settings;
 
 mod primitives {
-    /// Type alias for [axum::Json] with a default set equal to [serde_json::Value]
-    pub type AxumJson<T = serde_json::Value> = axum::Json<T>;
+
 }
 
 mod utils {}

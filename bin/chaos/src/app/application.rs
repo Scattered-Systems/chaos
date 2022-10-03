@@ -34,7 +34,7 @@ impl Chaos {
     }
     pub async fn run(&self) -> BoxResult<&Self> {
         println!("{}", self.context.settings.server.clone());
-        match self.spawn_rpc().run().await {
+        match self.spawn_rpc().await {
             Ok(_) => {}
             Err(_) => panic!("{:?}", scsys::Error::Default),
         };
