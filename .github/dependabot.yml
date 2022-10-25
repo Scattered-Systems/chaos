@@ -9,11 +9,7 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: cargo
-    directory: /bin/api
-    schedule:
-      interval: daily
-  - package-ecosystem: cargo
-    directory: /bin/cli
+    directory: /bin/chaos
     schedule:
       interval: daily
   - package-ecosystem: cargo

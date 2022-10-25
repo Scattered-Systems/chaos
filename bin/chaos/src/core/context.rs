@@ -4,9 +4,10 @@
     Description:
         ... Summary ...
 */
-use crate::Settings;
+use super::Settings;
+use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+#[derive(Clone, Debug, Deserialize, Hash, PartialEq, Serialize)]
 pub struct Context {
     pub settings: Settings,
 }

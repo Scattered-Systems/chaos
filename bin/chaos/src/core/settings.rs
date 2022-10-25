@@ -7,7 +7,8 @@
 use scsys::{
     collect_config_files,
     prelude::{
-        config::{Config, ConfigError, Environment}, Logger, Server,
+        config::{Config, ConfigError, Environment},
+        Logger, Server,
     },
 };
 
@@ -24,15 +25,22 @@ impl std::fmt::Display for Application {
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
-pub enum Provider {
-    Storj(Option<chaos_sdk::storj::StorjActor>)
+pub struct S3 {
+    access_key: String,
+    secret_key: String,
+    endpoint: String
+}
+
+#[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct Providers {
+    pub s3: Option<S3>
 }
 
 #[derive(Clone, Debug, Hash, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Settings {
     pub application: Application,
     pub logger: Logger,
-    pub provider: Option<chaos_sdk::storj::StorjActor>,
+    pub providers: Option<Providers>,
     pub server: Server,
 }
 
@@ -44,13 +52,11 @@ impl Settings {
         builder = builder.add_source(collect_config_files("**/*.config.*", false));
         builder = builder.add_source(Environment::default().separator("__"));
 
-        
         builder
             .build()
             .expect("Failed to build the configuration...")
             .try_deserialize()
     }
-    
 }
 
 impl Default for Settings {

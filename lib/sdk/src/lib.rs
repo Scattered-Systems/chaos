@@ -18,7 +18,4 @@ pub mod prelude {
     pub use arloader;
     #[cfg(feature = "ipfs")]
     pub use ipfs;
-    #[cfg(feature = "storj")]
-    pub use uplink;
-
 }

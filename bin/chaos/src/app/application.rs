@@ -4,25 +4,41 @@
     Description:
         ... Summary ...
 */
-use crate::{Context, Settings};
+use crate::core::{Context, Settings};
+
+use scsys::BoxResult;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, Deserialize, Hash, PartialEq, Serialize)]
 pub struct Chaos {
-    pub context: Context
+    pub context: Context,
 }
 
 impl Chaos {
     pub fn new(context: Context) -> Self {
         Self { context }
     }
-
-    pub fn get_context(&self) -> Context {
+    pub fn context(&self) -> Context {
         self.context.clone()
     }
-
     pub fn get_settings(&self) -> Settings {
         self.context.settings.clone()
+    }
+    pub fn with_logging(&self) -> &Self {
+        self.context.settings.logger.setup();
+        self
+    }
+    pub async fn spawn_rpc(&self) -> BoxResult<&Self> {
+        super::rpc::spawn_rpc().await.expect("Failed");
+        Ok(self)
+    }
+    pub async fn run(&self) -> BoxResult<&Self> {
+        println!("{}", self.context.settings.server.clone());
+        match self.spawn_rpc().await {
+            Ok(_) => {}
+            Err(_) => panic!("{:?}", scsys::Error::Default),
+        };
+        Ok(self)
     }
 }
 

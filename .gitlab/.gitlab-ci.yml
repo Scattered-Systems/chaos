@@ -1,0 +1,19 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build
+  - deploy
+variables:
+  TAG: latest
+
+build:docker-image:
+  before_script:
+    - docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_TOKEN"
+  only:
+    - master
+  script:
+    - docker build --pull -t "$DOCKERHUB_USERNAME/chaos:${TAG}" .
+    - docker push "$DOCKERHUB_USERNAME/chaos:${TAG}"
+  stage: build

@@ -5,21 +5,16 @@
         ... Summary ...
 */
 
-use s3::{creds::Credentials, Region};
-
-pub use self::core::*;
-
 pub mod app;
-mod core;
+pub mod core;
 
 #[tokio::main]
 async fn main() -> scsys::BoxResult {
     println!("Welcome to the Chaos!");
 
     let chaos = app::Chaos::default();
-  
+    chaos.with_logging();
+    chaos.run().await.expect("App failed to start");
 
     Ok(())
 }
-
-

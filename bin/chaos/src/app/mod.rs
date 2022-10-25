@@ -4,6 +4,7 @@
     Description:
         ... Summary ...
 */
-pub use self::interface::Chaos;
+pub use self::application::Chaos;
 
-mod interface;
+mod application;
+pub mod rpc;
