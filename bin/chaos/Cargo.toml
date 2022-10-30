@@ -3,12 +3,11 @@ authors = ["FL03 <jo3mccain@icloud.com> (https://gitlab.com/FL03)", "Scattered-S
 categories = []
 description = "Chaos is a complete cloud storage solution specializing in decentralized service providers"
 edition = "2021"
-homepage = "https://scattered-systems.github.io/chaos"
+homepage = "https://github.com/Scattered-Systems/chaos/wiki"
 keywords = ["application", "restful"]
 license = "MIT"
 name = "chaos"
-readme = "https://github.com/scattered-systems/chaos/#README"
-repository = "https://gitlab.com/scsys/services/chaos"
+repository = "https://github.com/Scattered-Systems/chaos"
 version = "0.1.0"
 
 [build-dependencies]

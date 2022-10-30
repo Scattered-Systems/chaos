@@ -13,6 +13,10 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: cargo
+    directory: /bin/gateway
+    schedule:
+      interval: daily
+  - package-ecosystem: cargo
     directory: /lib/sdk
     schedule:
       interval: daily

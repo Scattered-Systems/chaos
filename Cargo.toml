@@ -6,6 +6,7 @@ default-members = [
 
 members = [
     "bin/chaos",
+    "bin/gateway",
     "lib/sdk"
 ]
 

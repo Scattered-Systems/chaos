@@ -3,11 +3,11 @@ authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-
 categories = []
 description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
 edition = "2021"
-homepage = "https://scattered-systems.github.io/chaos/"
+homepage = "https://github.com/Scattered-Systems/chaos/wiki"
 keywords = []
 license = "MIT"
 name = "chaos-sdk"
-readme = "https://github.com/scattered-systems/chaos/#README.md"
+readme = "README.md"
 repository = "https://github.com/scattered-systems/chaos"
 version = "0.1.7"
 

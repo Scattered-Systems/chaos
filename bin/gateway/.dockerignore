@@ -1,0 +1,11 @@
+**/.artifacts/data/
+**/.artifacts/generated/
+**/.artifacts/test/
+
+**/.docker/data/
+**/.idea/
+**/.vscode/
+
+**/node_modules/
+**/target/
+**/venv/

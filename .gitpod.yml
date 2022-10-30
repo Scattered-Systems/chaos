@@ -1,3 +1,9 @@
 tasks:
-  - init: rustup default nightly && rustup target add wasm32-unknown-unknown --toolchain nightly && cargo build --workspace && cargo fmt --all
-    command: cargo watch -x test --all -q
+  - init: |
+      sudo apt update -y && sudo apt upgrade -y && sudo apt install -y protobuf-compiler
+      rustup update
+      rustup default nightly
+      rustup component add clippy rustfmt --toolchain nightly
+      rustup target add wasm32-unknown-unknown --toolchain nightly
+      cargo build --workspace && cargo fmt --all
+    command: cargo watch -x test --all
