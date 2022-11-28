@@ -20,7 +20,7 @@ bench = false
 name = "gateway"
 
 [dependencies]
-axum = { features =["headers", "http2"], version = "0.5.16" }
+axum = { features =["headers", "http2"], version = "0.6.0" }
 http = "0.2.8"
 rust-s3 = {features = ["with-tokio"], version = "0.32.3" }
 scsys = { features = ["full"], version = "0.1.21" }
