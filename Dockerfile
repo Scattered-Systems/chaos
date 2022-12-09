@@ -17,15 +17,14 @@ WORKDIR /workspace
 COPY . .
 RUN cargo build --release -v --workspace
 
-FROM debian:buster-slim as runner-base
+FROM debian:buster-slim as runner
 
 ENV RUST_LOG="info" \
     SERVER_PORT=8080
 
 RUN apt-get update -y && apt-get upgrade -y 
 
-COPY .config /config
-
+COPY --chown=55 .config /config
 VOLUME ["/config"]
 
 COPY --from=builder /workspace/target/release/chaos /bin/chaos
