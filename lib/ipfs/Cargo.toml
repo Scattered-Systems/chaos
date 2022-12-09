@@ -1,29 +1,29 @@
 [package]
 authors = ["FL03 <jo3mccain@icloud.com>", "Scattered-Systems (https://scattered-systems.com)"]
 categories = []
-description = "Chaos is next-generation cloud storage solution designed to support a myriad of different workflows"
+description = "chaos-ipfs"
 edition = "2021"
 homepage = "https://github.com/Scattered-Systems/chaos/wiki"
 keywords = []
-license = "MIT"
-name = "chaos-sdk"
-readme = "README.md"
+license = "Apache-2.0"
+name = "chaos-ipfs"
 repository = "https://github.com/scattered-systems/chaos"
 version = "0.1.7"
 
 [features]
-default = ["core", "ipfs"]
-full = ["core", "ipfs"]
-
-core = []
-ipfs = ["chaos-ipfs/default"]
+default = []
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 test = true
 
 [dependencies]
-chaos-ipfs = { features = [], optional = true, path = "../ipfs", version = "0.1.7" }
+ipfs = { git = "https://github.com/FL03/rust-ipfs" }
+scsys = { features = ["full"], version = "0.1.36" }
+serde = { features = ["derive"], version = "1.0.149" }
+serde_json = "1.0.89"
+tokio = { features = ["full"], version = "1.23.0" }
+tokio-stream = "0.1.11"
 
 [package.metadata.docs.rs]
 all-features = true

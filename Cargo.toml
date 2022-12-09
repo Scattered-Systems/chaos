@@ -1,12 +1,12 @@
 [workspace]
 default-members = [
-    "bin/chaos",
+    "chaos",
     "lib/sdk"
 ]
 
 members = [
-    "bin/chaos",
-    "bin/gateway",
+    "chaos",
+    "lib/ipfs",
     "lib/sdk"
 ]
 

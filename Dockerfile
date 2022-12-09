@@ -1,20 +1,40 @@
-FROM scsys/devspace:latest as builder
+FROM rust:latest as base
 
-RUN rustup default nightly
+RUN apt-get update -y && apt-get upgrade -y
 
-ADD . /app
-WORKDIR /app
+FROM base as builder-base
+
+RUN apt-get install -y \
+    protobuf-compiler
+
+FROM builder-base as builder
+
+ENV CARGO_TERM_COLOR=always
+
+ADD . /workspace
+WORKDIR /workspace
 
 COPY . .
-RUN cargo build --release --verbose
+RUN cargo build --release -v --workspace
 
-FROM photon
+FROM debian:buster-slim as runner-base
 
-ENV SERVER_PORT=8999
+ENV RUST_LOG="info" \
+    SERVER_PORT=8080
 
-COPY --from=builder /app/target/release/chaos /bin/chaos
+RUN apt-get update -y && apt-get upgrade -y 
 
-EXPOSE ${SERVER_PORT}/tcp
-EXPOSE ${SERVER_PORT}/udp
+COPY .config /config
 
-CMD ["chaos"]
+VOLUME ["/config"]
+
+COPY --from=builder /workspace/target/release/chaos /bin/chaos
+
+FROM runner
+
+EXPOSE 80
+EXPOSE 6379
+EXPOSE ${SERVER_PORT}
+
+ENTRYPOINT [ "chaos" ]
+CMD [ "system", "--up" ]

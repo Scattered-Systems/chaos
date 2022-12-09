@@ -1,6 +1,8 @@
-[application]
+cid = ""
+pk = ""
+sk = ""
 mode = "development"
-name = "rs-sandbox"
+name = "chaos"
 
 [database]
 name = "postgres"

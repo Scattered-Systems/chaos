@@ -1,8 +1,8 @@
 # scsys/chaos
 
-[![Code Analysis](https://github.com/Scattered-Systems/chaos/actions/workflows/rust-clippy.yml/badge.svg)](https://github.com/Scattered-Systems/chaos/actions/workflows/rust-clippy.yml)
-[![Docker](https://github.com/Scattered-Systems/chaos/actions/workflows/docker.yml/badge.svg)](https://github.com/Scattered-Systems/chaos/actions/workflows/docker.yml)
-[![Rust](https://github.com/Scattered-Systems/chaos/actions/workflows/rust.yml/badge.svg)](https://github.com/Scattered-Systems/chaos/actions/workflows/rust.yml)
+[![Code Analysis](https://github.com/scattered-systems/chaos/actions/workflows/clippy.yml/badge.svg)](https://github.com/scattered-systems/chaos/actions/workflows/clippy.yml)
+[![Docker](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml/badge.svg)](https://github.com/scattered-systems/chaos/actions/workflows/docker.yml)
+[![Rust](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml/badge.svg)](https://github.com/scattered-systems/chaos/actions/workflows/rust.yml)
 
 Welcome to Chaos
 
@@ -10,17 +10,51 @@ Welcome to Chaos
 
 ### Building from the source
 
-
-    git clone https://github.com/scattered-systems/chaos
-    cargo build --release --workspace
+```bash
+git clone https://github.com/scattered-systems/chaos
+cargo build --release --workspace
+```
 
 #### _Testing_
 
-    cargo test --all-features --release --verbose
+```bash
+cargo test --all-features --release --verbose
+```
 
 #### _Run_
 
-or
+```bash
+cargo run -- -h
+```
 
-    cargo run -p chaos --bin --release
+### Docker
 
+Start by cloning the repository
+
+```bash
+docker pull scsys/chaos:latest
+```
+
+#### _Build a new image_
+
+```bash
+docker buildx build --tag scsys/chaos:latest .
+```
+
+### Usage
+
+```rust
+
+```
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+- [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/)
+- [MIT](https://choosealicense.com/licenses/mit/)
